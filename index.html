@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+  <title>Happy Birthday Reet 🌸✨ | Private Universe #0819</title>
+  <meta name="description" content="A bespoke, 3D interactive, lovely and cute birthday odyssey engineered exclusively for Reet on 19 August by her Uttu puttu.">
+
+  <!-- Favicon Lily -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Three.js (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- 3D Three.js Background Container -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Screen Stamp Marks Layer (for Uttu Puttu soundboard) -->
+  <div id="stamp-marks-layer"></div>
+
+  <!-- 🌸 4.0 THE PLAYFUL GATEKEEPER (Cute Exclusivity Gate) -->
+  <div id="gatekeeper-overlay" class="gatekeeper-modal-overlay">
+    <div class="gatekeeper-signpost">
+      <div class="gatekeeper-badge">Restricted Access • Private Universe #0819</div>
+      <div class="gatekeeper-lily-icon">
+        <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 15 C45 35 25 45 15 50 C35 55 45 75 50 85 C55 75 75 55 85 50 C65 45 55 25 50 15 Z" fill="#FDFAF5" stroke="#D4AF37" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="6" fill="#B84A3F"/>
+        </svg>
+      </div>
+      <h1 class="gatekeeper-title">Hold on! This place was engineered for exactly one specific girl.</h1>
+      <p class="gatekeeper-subtitle">If you are NOT Reet, proceed to the nearest exit immediately. 👀</p>
+      <div class="gatekeeper-actions">
+        <button id="btn-reet-confirm" class="btn-primary btn-reet-confirm">I am Reet! 🤍</button>
+        <button id="btn-evasive" class="btn-secondary btn-evasive">I'm someone else</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambient Sound Bar (Zero External Dependencies) -->
+  <aside class="ambient-sound-bar" aria-label="Audio Controls">
+    <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+    </button>
+    <div class="sound-info">
+      <span class="sound-label">Atmosphere</span>
+      <span id="sound-status-text" class="sound-status">Tap to Play Song 🎶</span>
+    </div>
+    <div class="sound-waves">
+      <span class="sound-bar-item"></span>
+      <span class="sound-bar-item"></span>
+      <span class="sound-bar-item"></span>
+    </div>
+  </aside>
+
+  <!-- Main Experience Wrapper -->
+  <main class="experience-wrapper">
+
+    <!-- 💌 4.1 THE 3D WAX-SEALED ENVELOPE CEREMONY -->
+    <section class="envelope-ceremony-section" id="envelope-section">
+      <div class="envelope-intro-text">
+        <span class="section-tag">An Archival Delivery</span>
+        <h2>Hey Reet... 🤍<span class="pulsing-heart-badge">❤️</span></h2>
+        <p class="section-subtitle">I couldn't be there with you in person today... so I built a little world just for you.</p>
+      </div>
+
+      <div class="envelope-3d-stage">
+        <div id="wax-envelope" class="envelope-wrapper">
+          <div class="envelope-flap"></div>
+          <div class="envelope-letter">
+            <h3 class="font-serif" style="color: var(--crimson-rose); margin-bottom: 8px;">Made Exclusively for You 🤭</h3>
+            <p class="font-editorial" style="font-size: 1.15rem; color: var(--ink-charcoal); line-height: 1.5;">
+              A normal birthday text wasn't enough, so your Uttu puttu made you a whole website.
+            </p>
+            <span class="font-hand" style="color: var(--sepia-dust); margin-top: 10px; font-size: 1.2rem;">Scroll down, birthday girl ✨</span>
+          </div>
+          <div class="envelope-pocket"></div>
+          
+          <div id="wax-seal" class="wax-seal" title="Tap wax seal to open">
+            <div class="wax-seal-inner">
+              <svg class="wax-seal-lily" viewBox="0 0 100 100">
+                <path d="M50 85 C20 60 5 40 5 25 C5 12 15 5 28 5 C38 5 46 12 50 20 C54 12 62 5 72 5 C85 5 95 12 95 25 C95 40 80 60 50 85 Z" fill="#FFE5EC" stroke="#FFFFFF" stroke-width="3.5"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="wax-seal-hint">Tap the wax seal to open 🕯️</p>
+    </section>
+
+    <!-- 👑 4.2 HERO: THE EDITORIAL BIRTHDAY MONUMENT -->
+    <section class="hero-section" id="hero-monument">
+      <div class="hero-background-monument">19 • 08</div>
+      <div class="hero-content">
+        <div class="hero-badge-pill">19 August • Reet's Special Day</div>
+        <h1 class="hero-title">Happy Birthday, <span>Reet. ❤️</span><span class="pulsing-heart-badge">❤️</span></h1>
+        <p class="hero-caption">
+          Because a standard birthday text was never going to be enough for someone like you. 🤭
+        </p>
+
+        <!-- Wobble Keychain Badge Micro-Toy -->
+        <div class="hero-interactive-toy">
+          <div id="keychain-badge" class="keychain-badge" title="Drag me!">
+            <div class="keychain-ring"></div>
+            <span class="font-hand" style="font-size: 1.3rem; color: var(--crimson-rose); font-weight: 700;">
+              ✨ Certified Birthday Girl 🤍
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📜 4.3 THE COINCIDENCE (Emotional Centerpiece) -->
+    <section class="coincidence-section">
+      <div class="poem-parchment-sheet deckle-card">
+        <svg class="poem-watermark-lily" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+          <path d="M50 10 C40 35 15 45 5 50 C25 55 40 75 50 90 C60 75 75 55 95 50 C75 45 60 25 50 10 Z" stroke-width="1"/>
+        </svg>
+        <span class="section-tag" style="margin-bottom: 24px;">The Coincidence <span class="pulsing-heart-badge">❤️</span></span>
+        <div class="poem-lines">
+          <span class="poem-line">Maybe some people are meant to find each other.</span>
+          <span class="poem-line">You are the most beautiful coincidence</span>
+          <span class="poem-line">That life has planted on my path,</span>
+          <span class="poem-line">An unexpected meeting,</span>
+          <span class="poem-line">A chance that sounded</span>
+          <span class="poem-line">Like an inevitability.</span>
+          <span class="poem-line">Neither planned nor sought,</span>
+          <span class="poem-line">But falling at the right moment,</span>
+          <span class="poem-line">As if the universe had traced,</span>
+          <span class="poem-line">Unknowingly,</span>
+          <span class="poem-line">A route leading to you.</span>
+        </div>
+        <div class="poem-annotation">
+          "And somehow... that route led straight to you, Reet. 🤍"
+        </div>
+      </div>
+    </section>
+
+    <!-- 📸 SECTION 14: THE "FUTURE PLANS & FLIRTY CONVOS" ARCHIVE (Scrapbook) -->
+    <section class="scrapbook-section" id="scrapbook-section">
+      <div class="scrapbook-header">
+        <span class="section-tag">CONFIDENTIAL ARCHIVE // MANIFESTED PLANS 📁</span>
+        <h2 class="section-title">Things we’ve talked about... things we're definitely making happen. 😌🤍</h2>
+      </div>
+
+      <div id="scrapbook-grid" class="scrapbook-grid">
+        <!-- Rendered dynamically by scrapbook-data.js & app.js -->
+      </div>
+    </section>
+
+    <!-- 🌷 4.4 OUR LITTLE WORLD: 7 INTERACTIVE 3D ARTIFACTS -->
+    <section class="little-world-section">
+      <div style="text-align: center;">
+        <span class="section-tag">Curated Relics</span>
+        <h2 class="section-title">Our Little World <span class="pulsing-heart-badge">❤️</span></h2>
+        <p class="section-subtitle">Seven tangible interactive objects that belong strictly to us.</p>
+      </div>
+
+      <div class="little-world-grid">
+        <!-- Artifact 1: Dictionary -->
+        <article class="artifact-card deckle-card" id="artifact-dictionary">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">📖</div>
+            <span class="artifact-num">01 / 07</span>
+          </div>
+          <h3 class="artifact-title">Baby / Bubbu 🥺</h3>
+          <p class="artifact-desc">I don't even know when we started calling each other this, but now my day feels incomplete without hearing it.</p>
+          <div class="dictionary-box">
+            <p><span class="dict-term">Baby / Bubbu (n.):</span> My absolute favorite person to talk to.</p>
+          </div>
+        </article>
+
+        <!-- Artifact 2: Uttu Puttu Soundboard Dial -->
+        <article class="artifact-card deckle-card">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">🤭</div>
+            <span class="artifact-num">02 / 07</span>
+          </div>
+          <h3 class="artifact-title">Uttu puttu 🤭</h3>
+          <p class="artifact-desc">You gave me this nickname and honestly? I melt a little bit every single time you say it. ❤️</p>
+          <button id="stamp-dial-btn" class="stamp-toy-btn">
+            <span>Press for "Uttu puttu" ✨</span>
+          </button>
+        </article>
+
+        <!-- Artifact 3: Infinite Hug Meter -->
+        <article class="artifact-card deckle-card">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">🫂</div>
+            <span class="artifact-num">03 / 07</span>
+          </div>
+          <h3 class="artifact-title">The Hug Bank 🫂</h3>
+          <p class="artifact-desc">Since I can't wrap my arms around you right now, I'm stocking up as many of these as humanly possible.</p>
+          <div class="meter-display-wrap">
+            <div class="meter-gauge">
+              <div id="hug-meter-fill" class="meter-fill"></div>
+            </div>
+            <span id="hug-meter-count" class="meter-count-text">10,819 Hugs</span>
+            <button id="hug-meter-btn" class="btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Send another hug (+1)</button>
+          </div>
+        </article>
+
+        <!-- Artifact 4: Cheek Kiss Promissory Note -->
+        <article class="artifact-card deckle-card">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">😚</div>
+            <span class="artifact-num">04 / 07</span>
+          </div>
+          <h3 class="artifact-title">The Cheek Kiss 😌</h3>
+          <p class="artifact-desc">Just a reminder that you still owe me a cheek kiss. I'm keeping count, and you can't escape it. 😘</p>
+          <div id="cheek-kiss-ticket" class="promissory-ticket" style="cursor: pointer;">
+            <span class="ticket-stamp-tag">REDEEMABLE</span>
+            <p class="font-serif" style="font-weight: 700; color: var(--crimson-rose); margin-bottom: 4px;">One (1) Cheek Kiss</p>
+            <p style="font-size: 0.8rem; color: var(--sepia-dust);">Status: Redeemable the second I see you.</p>
+          </div>
+        </article>
+
+        <!-- Artifact 5: Suspicious Dream Dossier -->
+        <article class="artifact-card deckle-card" id="dossier-card">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">👀</div>
+            <span class="artifact-num">05 / 07</span>
+          </div>
+          <h3 class="artifact-title">That One Dream 👀</h3>
+          <p class="artifact-desc" style="font-size: 1.05rem; line-height: 1.6; margin-top: 10px;">I had this dream where you randomly said 'love you'... still waiting to see if dream-you was onto something. 🤭❤️</p>
+        </article>
+
+        <!-- Artifact 6: Future Guitar Masterclass -->
+        <article class="artifact-card deckle-card">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">🎸</div>
+            <span class="artifact-num">06 / 07</span>
+          </div>
+          <h3 class="artifact-title">Guitar Lessons 🎸</h3>
+          <p class="artifact-desc">I promised to teach you guitar, but let's be real—we’ll spend 5 minutes on chords and the rest of the time just laughing. 😂</p>
+          <div style="background: #FAF6EE; border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; text-align: center;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--crimson-rose);">Student attendance: 0% so far.</span>
+          </div>
+          <div class="guitar-strings-box">
+            <div class="guitar-string" title="Pluck String 1"></div>
+            <div class="guitar-string" title="Pluck String 2"></div>
+            <div class="guitar-string" title="Pluck String 3"></div>
+            <div class="guitar-string" title="Pluck String 4"></div>
+          </div>
+        </article>
+
+        <!-- Artifact 7: White Lilies Botanical Herbarium -->
+        <article class="artifact-card deckle-card" id="artifact-herbarium">
+          <div class="artifact-header">
+            <div class="artifact-icon-wrap">🤍</div>
+            <span class="artifact-num">07 / 07</span>
+          </div>
+          <h3 class="artifact-title">White Lilies Herbarium</h3>
+          <p class="artifact-desc">Preserved botanical elegance in glowing glass.</p>
+          <div class="specimen-glass">
+            <div class="specimen-photo-wrap">
+              <img src="assets/images/white_lilies_bouquet.jpg" alt="White Lilies Bouquet" class="specimen-photo" loading="lazy" decoding="async">
+            </div>
+            <p class="font-serif" style="font-style: italic; color: var(--ink-charcoal); font-weight: 700; margin-top: 12px;">White lilies for my baby</p>
+            <p class="font-hand" style="font-size: 1.25rem; color: var(--crimson-rose); margin-top: 6px; line-height: 1.45;">
+              "Hehe, did you think I asked what your favorite flower was just to make small talk? Obviously had a plan. 🌸😌"
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 🎁 4.5 THE INTERACTIVE 3D MYSTERY GIFT BOX -->
+    <section class="gift-box-section" id="gift-box-section">
+      <span class="section-tag">Interactive Mystery</span>
+      <h2 class="section-title">A Special Parcel for Reet</h2>
+      <p class="section-subtitle">Tap the satin ribbon to untie the knot and see what's inside.</p>
+
+      <div class="gift-box-stage">
+        <div id="mystery-gift-box" class="gift-box-3d" title="Click to open the gift box!">
+          <div class="gift-cube-body">
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revealed Gift Box Contents -->
+      <div class="gift-revealed-contents">
+        <!-- 🎸 Centerpiece: The Acoustic Guitar Video Surprise -->
+        <div class="gift-guitar-showcase deckle-card">
+          <div class="guitar-finale-badge">A PRIVATE CONCERT JUST FOR REET 🎸✨</div>
+          <h3 class="font-serif" style="font-size: 1.6rem; color: var(--crimson-rose); margin-bottom: 6px;">Something I Recorded for You 🤍</h3>
+          <p style="font-size: 0.95rem; color: var(--sepia-dust); margin-bottom: 16px; line-height: 1.55;">
+            Took out my guitar and played this specifically for you. Hope it makes you smile. 😌🥺
+          </p>
+
+          <div class="gift-video-player-wrap" id="gift-concert-frame">
+            <!-- 🎨 Full Artwork Poster -->
+            <img src="assets/images/hbd_baby_illustration.jpg" alt="Happy Birthday Baby" class="gift-art-poster-img" loading="lazy" decoding="async">
+
+            <!-- 💖 Cute Handwritten Badge with Hearts -->
+            <div class="gift-art-title-overlay">
+              <span class="cute-banner-sparkle">✨</span>
+              <span class="cute-banner-text">Happy Birthday Babyyyyy</span>
+              <span class="cute-banner-heart pulse-heart">❤️</span>
+              <span class="cute-banner-heart float-heart">💖</span>
+            </div>
+
+            <!-- 🎵 Audio / Video Playback Bar -->
+            <video id="gift-guitar-video" class="gift-video-element" playsinline controls preload="metadata" poster="assets/images/hbd_baby_illustration.jpg">
+              <source src="assets/hbdguitar.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <button id="btn-gift-guitar-play" class="btn-primary btn-gold" style="padding: 12px 28px; font-size: 0.98rem; width: 100%;">
+              Play it for me 🎵
+            </button>
+          </div>
+
+          <div class="guitar-player-meta" style="margin-top: 14px;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--crimson-rose);">Played & Recorded by your Uttu puttu 🤍</span>
+            <div class="guitar-eq-wave">
+              <span class="guitar-eq-bar"></span>
+              <span class="guitar-eq-bar"></span>
+              <span class="guitar-eq-bar"></span>
+              <span class="guitar-eq-bar"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Glowing Vouchers -->
+        <div class="vouchers-grid">
+          <div class="voucher-card">
+            <div class="voucher-icon">🎟️</div>
+            <h4 class="voucher-title">Emergency Hugs on Tap 🫂</h4>
+            <p style="font-size: 0.88rem; color: var(--sepia-dust); margin-bottom: 8px; line-height: 1.45;">For whenever you feel tired, sad, or just need a long, cozy hug from me.</p>
+            <span class="voucher-terms">Terms: Unlimited uses. Never expires. 🤍</span>
+          </div>
+
+          <div class="voucher-card">
+            <div class="voucher-icon">🎟️</div>
+            <h4 class="voucher-title">Certified Rant Buddy 😤</h4>
+            <p style="font-size: 0.88rem; color: var(--sepia-dust); margin-bottom: 8px; line-height: 1.45;">Tell me about all the annoying professors, bad days, and college drama. I'm taking your side unconditionally.</p>
+            <span class="voucher-terms">Terms: Zero judgment, 100% emotional support.</span>
+          </div>
+
+          <div class="voucher-card">
+            <div class="voucher-icon">🎟️</div>
+            <h4 class="voucher-title">2 AM Random Thoughts 🌙</h4>
+            <p style="font-size: 0.88rem; color: var(--sepia-dust); margin-bottom: 8px; line-height: 1.45;">Send me your weirdest questions, random overthinking, or sleep-deprived theories. I’m always here to listen.</p>
+            <span class="voucher-terms">Terms: Always open, just for you.</span>
+          </div>
+
+          <div class="voucher-card">
+            <div class="voucher-icon">🎟️</div>
+            <h4 class="voucher-title">One Real-Life Cheek Kiss 😚</h4>
+            <p style="font-size: 0.88rem; color: var(--sepia-dust); margin-bottom: 8px; line-height: 1.45;">Redeemable the exact second I see you in person. You cannot run away from this one.</p>
+            <span class="voucher-terms">Terms: Non-negotiable. Exclusively for Reet.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🫂 4.6 THE 3-SECOND "WARM EMBRACE" VIRTUAL HUG -->
+    <section class="virtual-hug-section">
+      <span class="section-tag">Tactile Haptics</span>
+      <h2 class="section-title">The 3-Second Birthday Embrace</h2>
+      <p class="section-subtitle">Press and hold the glowing button below for 3 full seconds without letting go.</p>
+
+      <div class="hug-hold-wrapper">
+        <div class="hug-pulse-ring"></div>
+        <svg class="hug-progress-svg" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="100" class="hug-progress-circle" id="hug-progress-circle"></circle>
+        </svg>
+        <button id="btn-hug-hold" class="btn-hug-hold">
+          <span class="hug-hold-icon">🫂</span>
+          <span class="hug-hold-text">Hold for Hug</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 🌸 4.7 "THINGS I LIKE ABOUT YOU" (Bespoke Polaroid Gallery) -->
+    <section class="things-like-section">
+      <div style="text-align: center;">
+        <span class="section-tag">An Honest List</span>
+        <h2 class="section-title">Things I Like About You <span class="pulsing-heart-badge">❤️</span></h2>
+        <p class="section-subtitle">A few of the countless little reasons you are my favorite person.</p>
+      </div>
+
+      <div class="things-gallery-grid">
+        <div class="like-note-card">
+          <div class="like-sparkle">✨</div>
+          <p class="like-text">"I like how easily you turn a totally ordinary conversation into absolute chaos."</p>
+        </div>
+        <div class="like-note-card">
+          <div class="like-sparkle">✨</div>
+          <p class="like-text">"I like your cute, distinct little texting habits."</p>
+        </div>
+        <div class="like-note-card">
+          <div class="like-sparkle">✨</div>
+          <p class="like-text">"I like how you can be super playful one second and deeply thoughtful the next."</p>
+        </div>
+        <div class="like-note-card">
+          <div class="like-sparkle">✨</div>
+          <p class="like-text">"I like that you let me see both your happy moments and your vulnerable days."</p>
+        </div>
+        <div class="like-note-card">
+          <div class="like-sparkle">✨</div>
+          <p class="like-text">"I like all the cute names you call me (especially Uttu puttu)."</p>
+        </div>
+        <div class="like-note-card">
+          <div class="like-sparkle">✨</div>
+          <p class="like-text">"I like that you notice little things... because I always notice them with you."</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <p class="font-hand" style="font-size: 1.8rem; color: var(--crimson-rose);">
+          "And honestly? I just really, really like the person you are. 🤍"
+        </p>
+      </div>
+    </section>
+
+    <!-- 🃏 4.8 THE "YOU ARE..." 3D SWIPEABLE CARD DECK -->
+    <section class="swipe-deck-section">
+      <span class="section-tag">Official Inquest</span>
+      <h2 class="section-title">The "You Are..." Verdicts</h2>
+      <p class="section-subtitle">Swipe or toss the cards left or right to uncover the truth.</p>
+
+      <div id="swipe-deck-container" class="swipe-deck-container">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="swipe-deck-controls">
+        <button id="deck-next-btn" class="btn-secondary">Next Verdict ➔</button>
+      </div>
+    </section>
+
+
+
+    <!-- 💌 4.10 THE CORE BIRTHDAY LETTER -->
+    <section class="core-letter-section">
+      <article class="core-letter-parchment deckle-card">
+        <span class="section-tag" style="margin-bottom: 20px;">A Letter For Reet</span>
+        <h2 class="letter-heading">Happy Birthday, Reet. ❤️<span class="pulsing-heart-badge">❤️</span></h2>
+        <p class="letter-body-p">
+          I don’t think I say it often enough, but I’m genuinely so grateful you came into my life.
+        </p>
+        <p class="letter-body-p">
+          Somewhere between our random conversations, stupid jokes, virtual hugs, 
+          late-night talks, dreams, guitar banter, and all our little moments… 
+          you became someone truly special to me.
+        </p>
+        <p class="letter-body-p">
+          I wish I could be there with you today. I wish I could hand you a bouquet of 
+          white lilies in person, give you a real birthday hug, tease you face-to-face, 
+          and see your smile when you laugh.
+        </p>
+        <p class="letter-body-p">
+          Since distance means I can’t do that today, I built you this little world instead.
+        </p>
+        <p class="letter-body-p">
+          I hope today reminds you of just how loved, celebrated, and deeply appreciated you are.
+        </p>
+        <div class="letter-signoff">
+          — always your Uttu puttu 🤍
+        </div>
+      </article>
+    </section>
+
+    <!-- 🌙 4.11 "WHEN LIFE GETS HEAVY" (Sanctuary Scene) -->
+    <section class="sanctuary-section">
+      <span class="section-tag" style="background: rgba(255,255,255,0.1); color: #FFFDF9; border-color: rgba(255,255,255,0.2);">Safe Haven</span>
+      <h2 class="sanctuary-title">And for the days that aren't easy...</h2>
+      <div class="sanctuary-lines">
+        <p>When college gets exhausting.</p>
+        <p>When professors test your patience.</p>
+        <p>When anxiety creeps in, or you just need to cry.</p>
+        <p style="margin-top: 20px; font-weight: 700; color: #FFFDF9;">Remember: You never have to pretend to have it all together around me.</p>
+        <p style="margin-top: 14px; font-family: var(--font-hand); font-size: 1.8rem; color: var(--warm-blush);">
+          "You can be messy, tired, grumpy, or annoying. I’m right here. 🫂"
+        </p>
+      </div>
+    </section>
+
+    <!-- 🎆 4.12 THE GRAND FINALE: MIDNIGHT WISH & FINAL HUG -->
+    <section class="finale-section">
+      <span class="section-tag">Midnight Wish</span>
+      <h2 id="birthday-banner-title" class="section-title">Counting down every second until 19 August • Reet's Day 🤍</h2>
+      
+      <!-- Live Countdown / Celebration Engine -->
+      <div class="countdown-box">
+        <div class="countdown-item">
+          <span id="cd-days" class="countdown-val">00</span>
+          <span class="countdown-lbl">Days</span>
+        </div>
+        <div class="countdown-item">
+          <span id="cd-hours" class="countdown-val">00</span>
+          <span class="countdown-lbl">Hours</span>
+        </div>
+        <div class="countdown-item">
+          <span id="cd-mins" class="countdown-val">00</span>
+          <span class="countdown-lbl">Minutes</span>
+        </div>
+        <div class="countdown-item">
+          <span id="cd-secs" class="countdown-val">00</span>
+          <span class="countdown-lbl">Seconds</span>
+        </div>
+      </div>
+
+      <div>
+        <button id="btn-final-hug" class="btn-primary btn-gold" style="font-size: 1.15rem; padding: 16px 36px;">
+          One Last Birthday Hug? 🫂
+        </button>
+      </div>
+
+      <p class="final-order-copy">
+        "Now go smile today. That's a direct order from your Uttu puttu. 😤❤️"
+      </p>
+    </section>
+
+  </main>
+
+  <!-- 🫂 Warm Embrace Golden Bloom Screen -->
+  <div id="hug-bloom-overlay">
+    <div class="bloom-card-container">
+      <div class="bloom-photo-frame">
+        <img src="assets/images/hug_sunset.jpg" alt="Our Warm Embrace" class="bloom-hug-image" loading="lazy" decoding="async" onerror="this.src='assets/images/cc5294265d99b03b3748a7155606b95b.jpg'">
+        <div class="bloom-photo-badge">Official Birthday Hug 🫂✨</div>
+      </div>
+      <div class="bloom-text-content">
+        <h2 class="bloom-title">Consider this your official birthday hug from me. 🫂❤️</h2>
+        <p class="bloom-subtitle">Mwuahhh 😚</p>
+        <p class="bloom-signature">— always your Uttu puttu 🤍</p>
+        <button id="bloom-close-btn" class="btn-primary btn-gold" style="margin-top: 10px; padding: 12px 28px;">
+          Hold Hug in Memory 🤍
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🖼️ Lightbox Modal for Scrapbook -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close-btn" title="Close Lightbox">✕</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightbox-img" src="" alt="Memory Photo">
+      </div>
+      <div class="lightbox-info">
+        <h3 id="lightbox-title" class="font-serif" style="margin-bottom: 8px;"></h3>
+        <p id="lightbox-note" class="font-hand" style="font-size: 1.45rem; color: var(--crimson-rose);"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/audio-synth.js"></script>
+  <script src="js/three-scene.js"></script>
+  <script src="js/scrapbook-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
