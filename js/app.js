@@ -238,45 +238,60 @@ function initScrapbookSection() {
       </div>
     `;
 
-    // 3D Flip on Click / Tap
-    let touchStartY = 0;
+    // 3D Flip on Click / Tap (Touch-safe differentiator)
     let touchStartX = 0;
+    let touchStartY = 0;
+    let isMoved = false;
 
     cardContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
+      isMoved = false;
+    }, { passive: true });
+
+    cardContainer.addEventListener('touchmove', (e) => {
+      const moveX = Math.abs(e.touches[0].clientX - touchStartX);
+      const moveY = Math.abs(e.touches[0].clientY - touchStartY);
+      if (moveX > 10 || moveY > 10) {
+        isMoved = true; // User is scrolling, do not trigger flip
+      }
     }, { passive: true });
 
     cardContainer.addEventListener('touchend', (e) => {
-      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
-      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
-      // Only flip if it was a deliberate tap and not a scroll
-      if (deltaX < 12 && deltaY < 12) {
+      if (!isMoved) {
         if (e.target.closest('.polaroid-image-frame')) {
           openLightbox(item);
           return;
         }
         cardContainer.classList.toggle('flipped');
+        const inner = cardContainer.querySelector('.polaroid-card-inner');
+        if (inner) {
+          inner.classList.toggle('is-flipped');
+        }
         if (window.birthdayAudio) window.birthdayAudio.playChime(index % 8);
         if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.changedTouches[0].clientX, e.changedTouches[0].clientY, 15);
       }
     });
 
+    // Fallback for desktop clicks
     cardContainer.addEventListener('click', (e) => {
-      // Check if mouse event
-      if (e.pointerType === 'touch') return; // handled by touchend
-
-      if (e.target.closest('.polaroid-image-frame')) {
-        openLightbox(item);
-        return;
-      }
-
-      cardContainer.classList.toggle('flipped');
-      if (window.birthdayAudio) {
-        window.birthdayAudio.playChime(index % 8);
-      }
-      if (window.birthday3D) {
-        window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 15);
+      // Only trigger on mouse clicks (pointerType !== 'touch')
+      if (e.pointerType !== 'touch') {
+        if (e.target.closest('.polaroid-image-frame')) {
+          openLightbox(item);
+          return;
+        }
+        cardContainer.classList.toggle('flipped');
+        const inner = cardContainer.querySelector('.polaroid-card-inner');
+        if (inner) {
+          inner.classList.toggle('is-flipped');
+        }
+        if (window.birthdayAudio) {
+          window.birthdayAudio.playChime(index % 8);
+        }
+        if (window.birthday3D) {
+          window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 15);
+        }
       }
     });
 
@@ -618,56 +633,78 @@ function initSwipeableDeck() {
   function initCardSwipe(card) {
     let startX = 0;
     let startY = 0;
-    let isSwiping = false;
+    let currentX = 0;
+    let currentY = 0;
+    let isDragging = false;
 
-    const onStart = (e) => {
-      isSwiping = true;
-      startX = e.touches ? e.touches[0].clientX : e.clientX;
-      startY = e.touches ? e.touches[0].clientY : e.clientY;
+    const onStart = (clientX, clientY) => {
+      isDragging = true;
+      startX = clientX;
+      startY = clientY;
+      currentX = 0;
+      currentY = 0;
+      card.style.transition = 'none';
     };
 
-    const onMove = (e) => {
-      if (!isSwiping) return;
-      const currentX = e.touches ? e.touches[0].clientX : e.clientX;
-      const deltaX = currentX - startX;
-      card.style.transform = `translateX(${deltaX}px) rotate(${deltaX * 0.08}deg)`;
+    const onMove = (clientX, clientY) => {
+      if (!isDragging) return;
+      currentX = clientX - startX;
+      currentY = clientY - startY;
+      const rotate = currentX * 0.08;
+      card.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${rotate}deg)`;
     };
 
-    const onEnd = (e) => {
-      if (!isSwiping) return;
-      isSwiping = false;
-      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-      const deltaX = endX - startX;
+    const onEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      const threshold = 80; // px threshold to trigger swipe
 
-      // 50px threshold for mobile flick/swipe
-      if (Math.abs(deltaX) > 50) {
-        // Toss card
-        const dir = deltaX > 0 ? 1 : -1;
-        card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-        card.style.transform = `translateX(${dir * 500}px) rotate(${dir * 45}deg)`;
+      if (Math.abs(currentX) > threshold) {
+        // Swipe out
+        const direction = currentX > 0 ? 1 : -1;
+        card.style.transition = 'transform 0.4s ease-out, opacity 0.3s ease-out';
+        card.style.transform = `translate3d(${direction * 400}px, ${currentY}px, 0) rotate(${direction * 30}deg)`;
         card.style.opacity = '0';
 
         if (window.birthdayAudio) window.birthdayAudio.playChime(currentIndex % 8);
-        if (window.birthday3D) window.birthday3D.spawnBloomBurst(endX, window.innerHeight / 2, 20);
+        if (window.birthday3D) window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 20);
 
         setTimeout(() => {
           currentIndex = (currentIndex + 1) % cardsData.length;
           renderDeck();
-        }, 300);
+        }, 350);
       } else {
-        card.style.transition = 'transform 0.3s var(--spring-bounce)';
-        card.style.transform = 'translateX(0) rotate(0deg)';
+        // Snap back to center
+        card.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        card.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
       }
     };
 
-    card.addEventListener('mousedown', onStart);
-    card.addEventListener('touchstart', onStart, { passive: true });
+    // Touch events for mobile
+    card.addEventListener('touchstart', (e) => {
+      onStart(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
 
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('touchmove', onMove, { passive: true });
+    card.addEventListener('touchmove', (e) => {
+      onMove(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
 
-    window.addEventListener('mouseup', onEnd);
-    window.addEventListener('touchend', onEnd);
+    card.addEventListener('touchend', onEnd);
+    card.addEventListener('touchcancel', onEnd);
+
+    // Pointer events for desktop drag
+    card.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') return; // Handled by touch events
+      onStart(e.clientX, e.clientY);
+      const moveHandler = (ev) => onMove(ev.clientX, ev.clientY);
+      const upHandler = () => {
+        onEnd();
+        window.removeEventListener('pointermove', moveHandler);
+        window.removeEventListener('pointerup', upHandler);
+      };
+      window.addEventListener('pointermove', moveHandler);
+      window.addEventListener('pointerup', upHandler);
+    });
   }
 
   if (btnNext) {
