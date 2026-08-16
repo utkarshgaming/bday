@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initAmbientSoundBar();
   initParallaxCards();
   initGlobalHeartSpawner();
+
+  // Ensure all cinematic background videos start playing immediately
+  document.querySelectorAll('.hero-cinematic-video').forEach(video => {
+    video.play().catch(() => {});
+  });
 });
 
 function initGlobalHeartSpawner() {
