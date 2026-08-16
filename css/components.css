@@ -373,6 +373,7 @@
    -------------------------------------------------------------------------- */
 .hero-section {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -854,15 +855,18 @@
   border: 2px solid var(--crimson-rose);
   color: var(--crimson-rose);
   padding: 12px 20px;
+  min-height: 48px;
   border-radius: var(--radius-full);
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   box-shadow: 0 4px 15px rgba(184, 74, 63, 0.18);
   transition: transform 0.2s var(--spring-bounce);
   margin-top: auto;
+  touch-action: manipulation;
 }
 
 .stamp-toy-btn:hover {
@@ -1457,16 +1461,18 @@
   inset: 0;
   background: radial-gradient(circle at center, rgba(255, 240, 243, 0.98) 0%, rgba(255, 227, 232, 0.97) 60%, rgba(255, 204, 213, 0.95) 100%);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 9995;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px 16px;
+  padding: max(24px, env(safe-area-inset-top, 24px)) max(16px, env(safe-area-inset-right, 16px)) max(24px, env(safe-area-inset-bottom, 24px)) max(16px, env(safe-area-inset-left, 16px));
   opacity: 0;
   visibility: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transition: opacity 0.8s var(--smooth-out), visibility 0.8s ease;
 }
 
@@ -1657,9 +1663,11 @@
   justify-content: center;
   text-align: center;
   user-select: none;
+  -webkit-user-select: none;
   cursor: grab;
   transform-origin: center bottom;
   transition: transform 0.4s var(--spring-bounce), opacity 0.4s ease;
+  touch-action: pan-y;
 }
 
 .deck-card:active {
@@ -1886,13 +1894,16 @@
   inset: 0;
   background: rgba(28, 22, 34, 0.92);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 10010;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: max(20px, env(safe-area-inset-top, 20px)) max(16px, env(safe-area-inset-right, 16px)) max(20px, env(safe-area-inset-bottom, 20px)) max(16px, env(safe-area-inset-left, 16px));
   opacity: 0;
   visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
@@ -1913,20 +1924,23 @@
 
 .lightbox-close-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: rgba(41, 35, 30, 0.6);
+  top: 12px;
+  right: 12px;
+  background: rgba(41, 35, 30, 0.65);
   color: white;
   border: none;
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  touch-action: manipulation;
 }
 
 .lightbox-img-wrap {
@@ -1993,13 +2007,16 @@
   inset: 0;
   background: radial-gradient(circle at center, rgba(38, 30, 46, 0.95) 0%, rgba(20, 16, 25, 0.98) 100%);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 10020;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: max(20px, env(safe-area-inset-top, 20px)) max(16px, env(safe-area-inset-right, 16px)) max(20px, env(safe-area-inset-bottom, 20px)) max(16px, env(safe-area-inset-left, 16px));
   opacity: 0;
   visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transition: opacity 0.5s var(--smooth-out), visibility 0.5s ease;
 }
 
@@ -2028,21 +2045,24 @@
 
 .guitar-modal-close-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: rgba(42, 36, 33, 0.1);
+  top: 12px;
+  right: 12px;
+  background: rgba(42, 36, 33, 0.15);
   border: 1px solid rgba(110, 99, 89, 0.2);
   color: var(--ink-charcoal);
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   transition: all 0.2s ease;
   z-index: 10;
+  touch-action: manipulation;
 }
 
 .guitar-modal-close-btn:hover {
