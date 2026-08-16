@@ -65,36 +65,54 @@
   <!-- Main Experience Wrapper -->
   <main class="experience-wrapper">
 
-    <!-- 💌 4.1 THE 3D WAX-SEALED ENVELOPE CEREMONY -->
-    <section class="envelope-ceremony-section" id="envelope-section">
-      <div class="envelope-intro-text">
-        <span class="section-tag">An Archival Delivery</span>
-        <h2>Hey Reet... 🤍<span class="pulsing-heart-badge">❤️</span></h2>
-        <p class="section-subtitle">I couldn't be there with you in person today... so I built a little world just for you.</p>
-      </div>
+    <!-- 💌 4.1 THE 3D WAX-SEALED ENVELOPE CEREMONY (CINEMATIC OPENING) -->
+    <section class="envelope-ceremony-section hero-cinematic-wrapper" id="envelope-section">
+      <video
+        class="hero-cinematic-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+      >
+        <source src="assets/153999-806572025.mp4" type="video/mp4" />
+      </video>
 
-      <div class="envelope-3d-stage">
-        <div id="wax-envelope" class="envelope-wrapper">
-          <div class="envelope-flap"></div>
-          <div class="envelope-letter">
-            <h3 class="font-serif" style="color: var(--crimson-rose); margin-bottom: 8px;">Made Exclusively for You 🤭</h3>
-            <p class="font-editorial" style="font-size: 1.15rem; color: var(--ink-charcoal); line-height: 1.5;">
-              A normal birthday text wasn't enough, so your Uttu puttu made you a whole website.
-            </p>
-            <span class="font-hand" style="color: var(--sepia-dust); margin-top: 10px; font-size: 1.2rem;">Scroll down, birthday girl ✨</span>
-          </div>
-          <div class="envelope-pocket"></div>
-          
-          <div id="wax-seal" class="wax-seal" title="Tap wax seal to open">
-            <div class="wax-seal-inner">
-              <svg class="wax-seal-lily" viewBox="0 0 100 100">
-                <path d="M50 85 C20 60 5 40 5 25 C5 12 15 5 28 5 C38 5 46 12 50 20 C54 12 62 5 72 5 C85 5 95 12 95 25 C95 40 80 60 50 85 Z" fill="#FFE5EC" stroke="#FFFFFF" stroke-width="3.5"/>
-              </svg>
+      <!-- Atmospheric Lighting & Vignette Overlays -->
+      <div class="hero-cinematic-vignette"></div>
+      <div class="hero-cinematic-tint"></div>
+
+      <!-- Foreground Content (Envelope, Seal & Text) -->
+      <div class="hero-cinematic-content">
+        <div class="envelope-intro-text">
+          <span class="section-tag">An Archival Delivery</span>
+          <h2>Hey Reet... 🤍<span class="pulsing-heart-badge">❤️</span></h2>
+          <p class="section-subtitle">I couldn't be there with you in person today... so I built a little world just for you.</p>
+        </div>
+
+        <div class="envelope-3d-stage">
+          <div id="wax-envelope" class="envelope-wrapper">
+            <div class="envelope-flap"></div>
+            <div class="envelope-letter">
+              <h3 class="font-serif" style="color: var(--crimson-rose); margin-bottom: 8px;">Made Exclusively for You 🤭</h3>
+              <p class="font-editorial" style="font-size: 1.15rem; color: var(--ink-charcoal); line-height: 1.5;">
+                A normal birthday text wasn't enough, so your Uttu puttu made you a whole website.
+              </p>
+              <span class="font-hand" style="color: var(--sepia-dust); margin-top: 10px; font-size: 1.2rem;">Scroll down, birthday girl ✨</span>
+            </div>
+            <div class="envelope-pocket"></div>
+            
+            <div id="wax-seal" class="wax-seal" title="Tap wax seal to open">
+              <div class="wax-seal-inner">
+                <svg class="wax-seal-lily" viewBox="0 0 100 100">
+                  <path d="M50 85 C20 60 5 40 5 25 C5 12 15 5 28 5 C38 5 46 12 50 20 C54 12 62 5 72 5 C85 5 95 12 95 25 C95 40 80 60 50 85 Z" fill="#FFE5EC" stroke="#FFFFFF" stroke-width="3.5"/>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
+        <p class="wax-seal-hint">Tap the wax seal to open 🕯️</p>
       </div>
-      <p class="wax-seal-hint">Tap the wax seal to open 🕯️</p>
     </section>
 
     <!-- 👑 4.2 HERO: THE EDITORIAL BIRTHDAY MONUMENT -->
