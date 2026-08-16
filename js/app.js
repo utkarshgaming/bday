@@ -76,6 +76,11 @@ function initGatekeeper() {
       window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 35);
     }
 
+    const cinematicVideo = document.querySelector('.hero-cinematic-video');
+    if (cinematicVideo && cinematicVideo.paused) {
+      cinematicVideo.play().catch(() => {});
+    }
+
     overlay.classList.add('unlocked');
     setTimeout(() => {
       overlay.style.display = 'none';
