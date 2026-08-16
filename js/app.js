@@ -210,25 +210,19 @@ function initKeychainBadge() {
    -------------------------------------------------------------------------- */
 function initScrapbookSection() {
   const grid = document.getElementById('scrapbook-grid');
-  const modal = document.getElementById('lightbox-modal');
-  const modalImg = document.getElementById('lightbox-img');
-  const modalTitle = document.getElementById('lightbox-title');
-  const modalNote = document.getElementById('lightbox-note');
-  const modalClose = document.getElementById('lightbox-close');
-
   if (!grid || typeof futureMomentsData === 'undefined') return;
 
   grid.innerHTML = '';
 
   futureMomentsData.forEach((item, index) => {
     const cardContainer = document.createElement('div');
-    cardContainer.className = 'polaroid-card-container';
+    cardContainer.className = 'moment-card-container polaroid-card-container';
     cardContainer.setAttribute('data-id', item.id);
 
     cardContainer.innerHTML = `
-      <div class="polaroid-card-inner">
+      <div class="moment-card-inner polaroid-card-inner">
         <!-- Front -->
-        <div class="polaroid-front">
+        <div class="moment-card-front polaroid-front">
           <div class="polaroid-image-frame" data-file="${item.file}">
             <img src="assets/images/${item.file}" alt="${item.title}" class="polaroid-image" loading="lazy" decoding="async">
             <span class="polaroid-tag-badge">${item.tag}</span>
@@ -237,62 +231,57 @@ function initScrapbookSection() {
             <h4 class="polaroid-title">${item.title}</h4>
             <p class="polaroid-caption">${item.caption}</p>
           </div>
-          <span class="polaroid-flip-hint">Tap to flip ↺</span>
+          <span class="polaroid-flip-hint">TAP TO FLIP ↺</span>
         </div>
 
         <!-- Back (Secret Sticky Note) -->
-        <div class="polaroid-back">
+        <div class="moment-card-back polaroid-back">
           <p class="secret-note-text">"${item.secretNote}"</p>
           <div class="polaroid-back-footer">— your Uttu puttu 🤍</div>
         </div>
       </div>
     `;
 
-    // 3D Flip on Click / Tap (Touch-safe differentiator)
+    // Touch & Click 3D Card Flip Handler (Scroll-safe, reliable 180° flip)
     let touchStartX = 0;
     let touchStartY = 0;
-    let isMoved = false;
+    let hasScrolled = false;
 
     cardContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
-      isMoved = false;
+      hasScrolled = false;
     }, { passive: true });
 
     cardContainer.addEventListener('touchmove', (e) => {
-      const moveX = Math.abs(e.touches[0].clientX - touchStartX);
-      const moveY = Math.abs(e.touches[0].clientY - touchStartY);
-      if (moveX > 10 || moveY > 10) {
-        isMoved = true; // User is scrolling, do not trigger flip
+      const diffX = Math.abs(e.touches[0].clientX - touchStartX);
+      const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+      if (diffX > 8 || diffY > 8) {
+        hasScrolled = true; // User is scrolling, do not flip
       }
     }, { passive: true });
 
     cardContainer.addEventListener('touchend', (e) => {
-      if (!isMoved) {
-        if (e.target.closest('.polaroid-image-frame')) {
-          openLightbox(item);
-          return;
-        }
+      if (!hasScrolled) {
+        const inner = cardContainer.querySelector('.moment-card-inner') || cardContainer.querySelector('.polaroid-card-inner');
         cardContainer.classList.toggle('flipped');
-        const inner = cardContainer.querySelector('.polaroid-card-inner');
         if (inner) {
           inner.classList.toggle('is-flipped');
         }
-        if (window.birthdayAudio) window.birthdayAudio.playChime(index % 8);
-        if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.changedTouches[0].clientX, e.changedTouches[0].clientY, 15);
+        if (window.birthdayAudio) {
+          window.birthdayAudio.playChime(index % 8);
+        }
+        if (window.birthday3D && e.changedTouches && e.changedTouches[0]) {
+          window.birthday3D.spawnBloomBurst(e.changedTouches[0].clientX, e.changedTouches[0].clientY, 15);
+        }
       }
     });
 
-    // Fallback for desktop clicks
+    // Desktop click support
     cardContainer.addEventListener('click', (e) => {
-      // Only trigger on mouse clicks (pointerType !== 'touch')
       if (e.pointerType !== 'touch') {
-        if (e.target.closest('.polaroid-image-frame')) {
-          openLightbox(item);
-          return;
-        }
+        const inner = cardContainer.querySelector('.moment-card-inner') || cardContainer.querySelector('.polaroid-card-inner');
         cardContainer.classList.toggle('flipped');
-        const inner = cardContainer.querySelector('.polaroid-card-inner');
         if (inner) {
           inner.classList.toggle('is-flipped');
         }
@@ -307,28 +296,6 @@ function initScrapbookSection() {
 
     grid.appendChild(cardContainer);
   });
-
-  function openLightbox(item) {
-    if (!modal) return;
-    modalTitle.textContent = item.title;
-    modalNote.textContent = `"${item.secretNote}"`;
-    modalImg.src = `assets/images/${item.file}`;
-    modalImg.style.display = 'block';
-    modal.classList.add('active');
-    if (window.birthdayAudio) window.birthdayAudio.playHarpGlissando();
-  }
-
-  if (modalClose) {
-    modalClose.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-  }
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('active');
-    });
-  }
 }
 
 /* --------------------------------------------------------------------------

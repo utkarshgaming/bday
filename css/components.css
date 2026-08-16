@@ -577,17 +577,21 @@
   padding: 10px;
 }
 
-/* 3D Flippable Polaroid Card / Flip Card Engine */
+/* 3D Flippable Polaroid Card / Flip Card Engine (WebKit & Safari 3D Fix) */
+.moment-card-container,
 .polaroid-card-container,
 .flip-card-container {
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
   height: 420px;
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
+.moment-card-inner,
 .polaroid-card-inner,
 .flip-card-inner {
   position: relative;
@@ -595,19 +599,24 @@
   height: 100%;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  will-change: transform;
   border-radius: var(--radius-md);
   cursor: pointer;
 }
 
+.moment-card-container.flipped .moment-card-inner,
+.moment-card-inner.is-flipped,
 .polaroid-card-container.flipped .polaroid-card-inner,
 .polaroid-card-inner.is-flipped,
-.flip-card-inner.is-flipped,
-.flip-card-container.flipped .flip-card-inner {
+.flip-card-container.flipped .flip-card-inner,
+.flip-card-inner.is-flipped {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
 
+.moment-card-front,
+.moment-card-back,
 .polaroid-front,
 .polaroid-back,
 .flip-card-front,
@@ -616,15 +625,16 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transform: rotateX(0deg); /* iOS Safari rendering fix */
+  -webkit-backface-visibility: hidden;
+  transform: rotateX(0deg); /* Crucial: Fixes Safari z-index / rendering bleed */
   -webkit-transform: rotateX(0deg);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-medium);
   overflow: hidden;
 }
 
+.moment-card-back,
 .polaroid-back,
 .flip-card-back {
   transform: rotateY(180deg);
