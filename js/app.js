@@ -273,7 +273,7 @@ function initKeychainBadge() {
 }
 
 /* --------------------------------------------------------------------------
-   📸 SECTION 14: THE "FUTURE PLANS & FLIRTY CONVOS" ARCHIVE (Scrapbook)
+   📸 SECTION 14: THE "MANIFESTING" FAIRY-LIGHT PHOTO WALL
    -------------------------------------------------------------------------- */
 function initScrapbookSection() {
   const grid = document.getElementById('scrapbook-grid');
@@ -282,32 +282,42 @@ function initScrapbookSection() {
   grid.innerHTML = '';
 
   futureMomentsData.forEach((item, index) => {
-    const cardContainer = document.createElement('div');
-    cardContainer.className = 'moment-card-container polaroid-card-container';
-    cardContainer.setAttribute('data-id', item.id);
+    const hangingWrapper = document.createElement('div');
+    hangingWrapper.className = 'hanging-card-wrapper';
 
-    cardContainer.innerHTML = `
-      <div class="moment-card-inner polaroid-card-inner">
-        <!-- Front -->
-        <div class="moment-card-front polaroid-front">
-          <div class="polaroid-image-frame" data-file="${item.file}">
-            <img src="assets/images/${item.file}" alt="${item.title}" class="polaroid-image" loading="lazy" decoding="async">
-            <span class="polaroid-tag-badge">${item.tag}</span>
-          </div>
-          <div class="polaroid-caption-area">
-            <h4 class="polaroid-title">${item.title}</h4>
-            <p class="polaroid-caption">${item.caption}</p>
-          </div>
-          <span class="polaroid-flip-hint">TAP TO FLIP ↺</span>
-        </div>
+    hangingWrapper.innerHTML = `
+      <!-- Clothespin / Light Bulb Clip Anchor -->
+      <div class="light-clip-bulb">
+        <div class="bulb-glow"></div>
+        <div class="clip-peg"></div>
+      </div>
 
-        <!-- Back (Secret Sticky Note) -->
-        <div class="moment-card-back polaroid-back">
-          <p class="secret-note-text">"${item.secretNote}"</p>
-          <div class="polaroid-back-footer">CONFIDENTIAL NOTE // 08•19 ❤️</div>
+      <!-- 3D Flip Card Shell -->
+      <div class="moment-card-container polaroid-card-container" data-id="${item.id}">
+        <div class="moment-card-inner polaroid-card-inner">
+          <!-- Front -->
+          <div class="moment-card-front polaroid-front">
+            <div class="polaroid-image-frame polaroid-photo-frame" data-file="${item.file}">
+              <img src="assets/images/${item.file}" alt="${item.title}" class="polaroid-image" loading="lazy" decoding="async">
+              <span class="polaroid-tag-badge plan-tag">${item.tag}</span>
+            </div>
+            <div class="polaroid-caption-area polaroid-caption">
+              <h4 class="polaroid-title">${item.title}</h4>
+              <p class="polaroid-caption-text">${item.caption}</p>
+              <span class="polaroid-flip-hint">TAP TO FLIP ↺</span>
+            </div>
+          </div>
+
+          <!-- Back (Secret Sticky Note) -->
+          <div class="moment-card-back polaroid-back">
+            <p class="secret-note-text">"${item.secretNote}"</p>
+            <div class="polaroid-back-footer">CONFIDENTIAL NOTE // 08•19 ❤️</div>
+          </div>
         </div>
       </div>
     `;
+
+    const cardContainer = hangingWrapper.querySelector('.moment-card-container');
 
     // Unified Pointer-Event 3D Card Flip Handler (Scroll-safe, prevents ghost double-flips)
     let pointerStartX = 0;
@@ -356,7 +366,7 @@ function initScrapbookSection() {
       isPointerDown = false;
     });
 
-    grid.appendChild(cardContainer);
+    grid.appendChild(hangingWrapper);
   });
 }
 

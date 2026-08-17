@@ -903,33 +903,129 @@
   padding-top: 24px;
 }
 
-/* --------------------------------------------------------------------------
-   📸 SECTION 14: THE "FUTURE PLANS & FLIRTY CONVOS" ARCHIVE (Scrapbook)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   📸 SECTION 14: FAIRY-LIGHT HANGING PHOTO WALL & MANIFESTING POLAROID DECK
+   ========================================================================== */
+.photo-wall-section,
 .scrapbook-section {
-  padding: 100px 20px;
-  max-width: 1300px;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 60px 16px 80px;
 }
 
 .scrapbook-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 5;
 }
 
+/* Glowing Fairy Light String */
+.fairy-light-string {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  margin-bottom: 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fairy-wire {
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px dashed rgba(255, 214, 153, 0.55);
+  border-radius: 50% / 18px;
+  filter: drop-shadow(0 0 10px rgba(255, 200, 100, 0.7));
+}
+
+/* Hanging Polaroids Deck Grid */
+.hanging-polaroids-deck,
 .scrapbook-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 32px;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 44px 24px;
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  padding: 15px 4px 30px;
 }
 
-/* 3D Flippable Polaroid Card / Flip Card Engine (WebKit & Safari 3D Fix) */
+/* Repeating Hanging Polaroid Card Item */
+.hanging-card-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: top center;
+  padding-top: 14px;
+}
+
+/* Light Clip / Bulb Top Anchor */
+.light-clip-bulb {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.bulb-glow {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #FFF3D1;
+  box-shadow: 0 0 16px 6px rgba(255, 198, 88, 0.9),
+              0 0 28px 12px rgba(255, 140, 60, 0.45);
+  margin-bottom: -7px;
+  animation: pulseLight 3s ease-in-out infinite alternate;
+}
+
+.clip-peg {
+  width: 11px;
+  height: 22px;
+  background: linear-gradient(135deg, #F0DFC8 0%, #D4BA96 100%);
+  border-radius: 3px;
+  border: 1px solid rgba(180, 140, 100, 0.4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pulseLight {
+  0% { opacity: 0.85; filter: drop-shadow(0 0 6px rgba(255, 200, 100, 0.8)); }
+  100% { opacity: 1; filter: drop-shadow(0 0 14px rgba(255, 220, 120, 1)); }
+}
+
+/* Natural Hanging Angles */
+.hanging-card-wrapper:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+.hanging-card-wrapper:nth-child(even) {
+  transform: rotate(2.2deg);
+}
+.hanging-card-wrapper:nth-child(3n) {
+  transform: rotate(-1.5deg);
+}
+.hanging-card-wrapper:nth-child(4n) {
+  transform: rotate(1.8deg);
+}
+
+.hanging-card-wrapper:hover {
+  transform: rotate(0deg) translateY(-5px) scale(1.02);
+  z-index: 15;
+}
+
+/* 3D Flippable Polaroid Card / Flip Card Engine */
 .moment-card-container,
-.polaroid-card-container,
-.flip-card-container {
+.polaroid-card-container {
   perspective: 1200px;
   -webkit-perspective: 1200px;
+  width: 100%;
   height: 420px;
   touch-action: pan-y;
   user-select: none;
@@ -939,8 +1035,7 @@
 }
 
 .moment-card-inner,
-.polaroid-card-inner,
-.flip-card-inner {
+.polaroid-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
@@ -957,9 +1052,7 @@
 .moment-card-container.flipped .moment-card-inner,
 .moment-card-inner.is-flipped,
 .polaroid-card-container.flipped .polaroid-card-inner,
-.polaroid-card-inner.is-flipped,
-.flip-card-container.flipped .flip-card-inner,
-.flip-card-inner.is-flipped {
+.polaroid-card-inner.is-flipped {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
@@ -967,9 +1060,7 @@
 .moment-card-front,
 .moment-card-back,
 .polaroid-front,
-.polaroid-back,
-.flip-card-front,
-.flip-card-back {
+.polaroid-back {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -978,53 +1069,38 @@
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transform: rotateX(0deg); /* Crucial: Fixes Safari z-index / rendering bleed */
+  transform: rotateX(0deg);
   -webkit-transform: rotateX(0deg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-medium);
+  border-radius: 4px !important;
+  background: #FFFDF9 !important;
+  padding: 12px 12px 18px 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(230, 220, 210, 0.7);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .moment-card-back,
-.polaroid-back,
-.flip-card-back {
+.polaroid-back {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
 
 /* Front Styling */
-.polaroid-front,
-.flip-card-front {
-  background: #FFFFFF;
-  padding: 16px 16px 24px;
+.polaroid-front {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
-.polaroid-front::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 22px;
-  background: rgba(232, 180, 176, 0.6);
-  backdrop-filter: blur(4px);
-  border: 1px dashed rgba(212, 175, 55, 0.4);
-  z-index: 10;
-  opacity: 0.85;
-}
-
-.polaroid-image-frame {
-  width: 100%;
-  height: 250px;
-  background: #FAF6EE;
-  border-radius: 6px;
-  overflow: hidden;
+.polaroid-image-frame,
+.polaroid-photo-frame {
   position: relative;
-  display: block;
+  width: 100%;
+  height: 245px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #111;
 }
 
 .polaroid-image {
@@ -1036,58 +1112,61 @@
 }
 
 .polaroid-front:hover .polaroid-image {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
-.polaroid-tag-badge {
+.polaroid-tag-badge,
+.plan-tag {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(41, 35, 30, 0.7);
+  top: 8px;
+  right: 8px;
+  background: rgba(41, 35, 30, 0.75);
   color: #FFFDF9;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: var(--radius-full);
   backdrop-filter: blur(4px);
 }
 
-.polaroid-caption-area {
-  margin-top: 14px;
+.polaroid-caption-area,
+.polaroid-caption {
+  margin-top: 10px;
   text-align: center;
 }
 
 .polaroid-title {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.12rem;
+  font-size: 1.08rem;
   font-weight: 700;
-  color: #2E1820;
-  margin-bottom: 5px;
+  color: #2E1820 !important;
+  margin-bottom: 4px;
 }
 
-.polaroid-caption {
-  font-size: 0.88rem;
+.polaroid-caption-text {
+  font-size: 0.82rem;
   color: #4A3B32;
-  line-height: 1.45;
+  line-height: 1.35;
+  margin: 0;
 }
 
 .polaroid-flip-hint {
   margin-top: auto;
-  font-size: 0.72rem;
-  color: var(--crimson-rose);
+  font-size: 0.7rem;
+  color: #B83253 !important;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 }
 
 /* Back Styling (Secret Sticky Note) */
 .polaroid-back {
-  background: #FFF9E6;
+  background: #FFF9E6 !important;
   border: 2px solid rgba(212, 175, 55, 0.35);
   transform: rotateY(180deg);
-  padding: 32px 24px;
+  padding: 28px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1099,8 +1178,8 @@
 .polaroid-back::before {
   content: "SECRET NOTE 🤫";
   position: absolute;
-  top: 16px;
-  font-size: 0.7rem;
+  top: 14px;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   color: var(--crimson-rose);
@@ -1109,16 +1188,65 @@
 .secret-note-text {
   font-family: 'Caveat', cursive;
   font-size: 1.45rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: #2E1820;
-  margin: 16px 0;
+  margin: 12px 0;
   white-space: pre-line;
 }
 
 .polaroid-back-footer {
   font-family: var(--font-script);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: var(--crimson-rose);
+}
+
+/* Mobile Media Queries */
+@media (max-width: 640px) {
+  .photo-wall-section,
+  .scrapbook-section {
+    padding: 35px 10px 50px;
+  }
+
+  .hanging-polaroids-deck,
+  .scrapbook-grid {
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 28px 12px;
+    padding: 10px 4px;
+  }
+  
+  .hanging-card-wrapper {
+    transform: rotate(0deg) !important;
+    padding-top: 10px;
+  }
+
+  .moment-card-container,
+  .polaroid-card-container {
+    height: 310px;
+  }
+
+  .polaroid-front,
+  .polaroid-back {
+    padding: 8px 8px 12px 8px;
+  }
+
+  .polaroid-image-frame,
+  .polaroid-photo-frame {
+    height: 155px;
+  }
+
+  .polaroid-title {
+    font-size: 0.9rem;
+  }
+
+  .polaroid-caption-text {
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  .secret-note-text {
+    font-size: 1.15rem;
+    line-height: 1.35;
+  }
 }
 
 /* --------------------------------------------------------------------------
