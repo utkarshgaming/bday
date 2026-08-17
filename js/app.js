@@ -373,27 +373,28 @@ function initLittleWorldArtifacts() {
     });
   }
 
-  // 2. Uttu Puttu Rotary Stamp
+  // 2. Secret Nickname Stamp Soundboard & Reetu Puttu Badge Spawner
   const stampBtn = document.getElementById('stamp-dial-btn');
   const stampLayer = document.getElementById('stamp-marks-layer');
 
   if (stampBtn && stampLayer) {
     stampBtn.addEventListener('click', (e) => {
       if (window.birthdayAudio) window.birthdayAudio.playStampSound();
-      if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 20);
+      if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 25);
 
       const stamp = document.createElement('div');
-      stamp.className = 'screen-stamp';
-      stamp.innerHTML = 'Uttu puttu 🤍';
-      stamp.style.left = `${Math.random() * (window.innerWidth - 180)}px`;
-      stamp.style.top = `${Math.random() * (window.innerHeight - 80)}px`;
-      stamp.style.setProperty('--rot', `${(Math.random() - 0.5) * 30}deg`);
+      stamp.className = 'screen-stamp floating-nickname-badge';
+      stamp.innerHTML = 'Reetu Puttu 🤍';
+      stamp.style.left = `${Math.max(16, Math.min(window.innerWidth - 220, Math.random() * (window.innerWidth - 200)))}px`;
+      stamp.style.top = `${Math.max(60, Math.min(window.innerHeight - 80, Math.random() * (window.innerHeight - 100)))}px`;
+      stamp.style.setProperty('--rot', `${(Math.random() - 0.5) * 28}deg`);
 
       stampLayer.appendChild(stamp);
 
       setTimeout(() => {
-        stamp.style.transition = 'opacity 0.6s ease';
+        stamp.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         stamp.style.opacity = '0';
+        stamp.style.transform = 'scale(0.8) translateY(-20px)';
         setTimeout(() => stamp.remove(), 600);
       }, 3500);
     });

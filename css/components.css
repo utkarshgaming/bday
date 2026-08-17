@@ -970,35 +970,45 @@
   font-family: var(--font-serif);
 }
 
-/* Artifact 2: Uttu Puttu Stamp Soundboard */
+/* Artifact 2: Secret Nickname Stamp Soundboard & Button */
+.secret-nickname-btn,
 .stamp-toy-btn {
-  background: linear-gradient(135deg, #FFFDF9, #FDEEEB);
-  border: 2px solid var(--crimson-rose);
-  color: var(--crimson-rose);
-  padding: 12px 20px;
-  min-height: 48px;
+  background: rgba(255, 235, 238, 0.95);
+  color: #D6336C;
+  border: 1.5px solid #FF8FA3;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  min-height: 44px;
   border-radius: var(--radius-full);
-  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 117, 143, 0.25);
+  transition: transform 0.2s var(--spring-bounce), box-shadow 0.2s ease, background 0.2s ease;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 15px rgba(184, 74, 63, 0.18);
-  transition: transform 0.2s var(--spring-bounce);
   margin-top: auto;
   touch-action: manipulation;
+  user-select: none;
+  text-decoration: none;
 }
 
+.secret-nickname-btn:hover,
 .stamp-toy-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 117, 143, 0.35);
+  background: rgba(255, 225, 230, 0.98);
+  color: #C2255C;
 }
 
+.secret-nickname-btn:active,
 .stamp-toy-btn:active {
   transform: scale(0.95);
 }
 
-/* Floating Stamp Marks Layer */
+/* Floating Stamp Marks & Nickname Badges Layer */
 #stamp-marks-layer {
   position: fixed;
   inset: 0;
@@ -1006,19 +1016,23 @@
   z-index: 9990;
 }
 
+.floating-nickname-badge,
 .screen-stamp {
   position: absolute;
-  padding: 10px 20px;
-  border: 3px solid var(--crimson-rose);
-  color: var(--crimson-rose);
-  border-radius: 12px;
-  font-family: var(--font-hand);
-  font-size: 1.8rem;
+  padding: 8px 18px;
+  border: 2px solid #D6336C;
+  color: #D6336C;
+  border-radius: 14px;
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
   font-weight: 700;
-  background: rgba(255, 253, 249, 0.85);
-  box-shadow: 0 10px 25px rgba(184, 74, 63, 0.35);
+  background: rgba(255, 253, 249, 0.96);
+  box-shadow: 0 8px 25px rgba(214, 51, 108, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
   animation: stampPop 0.4s var(--spring-bounce) forwards;
   user-select: none;
+  pointer-events: none;
+  z-index: 9990;
+  white-space: nowrap;
 }
 
 @keyframes stampPop {
