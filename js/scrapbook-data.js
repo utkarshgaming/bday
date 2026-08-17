@@ -33,7 +33,7 @@ const futureMomentsData = [
     file: "IMG_8003.JPG",
     title: "Lap Nap Sanctuary 💆‍♂️❤️",
     caption: "The only acceptable place to collapse after an exhausting day. 🥺",
-    secretNote: "Head scratches and quiet moments in your lap > literally anything else in this world.",
+    secretNote: "Head scratches and quiet moments in your lap > literally anything else. 😌",
     tag: "Cozy Moment"
   },
   {
@@ -72,7 +72,7 @@ const futureMomentsData = [
     id: "moment-kitchen-hug",
     file: "IMG_8007.JPG",
     title: "Kitchen Assistant 🍳😌",
-    caption: "Stealing back-hugs and cheek kissi for my baby while you're trying to cook. 😚❤️",
+    caption: "Stealing back-hugs and cheek kisses while you're trying to cook. 😚❤️",
     secretNote: "Zero cooking skills, but 10/10 dedication to annoying you in the kitchen.",
     tag: "Future Routine"
   },
