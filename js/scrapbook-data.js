@@ -1,16 +1,32 @@
 /**
  * 🌸 ULTRA-BESPOKE 3D BIRTHDAY ODYSSEY FOR REET
- * Section 14: Future Plans & Flirty Convos Archive Data Configuration
+ * Section 14: Manifesting Plans & Cherished Memories Archive Data Configuration
  */
 
 const futureMomentsData = [
+  {
+    id: "moment-white-lilies",
+    file: "white_lilies_bouquet.jpg",
+    title: "White lilies for baby",
+    caption: "Did you really think that was just small talk? 🤭❤️",
+    secretNote: "Remember when I randomly asked about your favorite flower? Hehe... did you really think that was just small talk? Obviously I asked specifically for this. ❤️",
+    tag: "MANIFESTING #01"
+  },
+  {
+    id: "moment-lip-gloss",
+    file: "lip_gloss_routine.jpg",
+    title: "Lip Gloss Transfer Routine 💄✨",
+    caption: "Aapke bhi apply kar du? 🤭",
+    secretNote: "What if you turn your face 'galti se'? \nGuess my lips are getting glossy too... or maybe I'll just transfer it directly from yours. 😌💋",
+    tag: "MANIFESTING #02"
+  },
   {
     id: "moment-csgo",
     file: "IMG_7997.JPG",
     title: "CS:GO Distractions 👀🎮",
     caption: "Backseat gaming or just finding an excuse to sit on my lap? 🤭❤️",
     secretNote: "You're definitely ruining my CS:GO rank... and I'm 100% letting you do it.",
-    tag: "Future Plan #1"
+    tag: "MANIFESTING #03"
   },
   {
     id: "moment-cheek-bite",
@@ -18,7 +34,7 @@ const futureMomentsData = [
     title: "Eating Your Cheek 😝",
     caption: "When normal cheek kisses escalate into aggressive affection 😤🤏",
     secretNote: "You act surprised, but you know you wouldn't even try to stop me. 😌",
-    tag: "Running Joke"
+    tag: "MANIFESTING #04"
   },
   {
     id: "moment-saree-car",
@@ -26,7 +42,7 @@ const futureMomentsData = [
     title: "My Hawttt Racetrack 🏎️💨",
     caption: "Finding the most unserious ways to annoy you when you look this fine in a saree 🤭✨",
     secretNote: "You looking ridiculously stunning vs. my five-year-old brain having zero chill.",
-    tag: "Future Plan #2"
+    tag: "MANIFESTING #05"
   },
   {
     id: "moment-lap-nap",
@@ -34,7 +50,7 @@ const futureMomentsData = [
     title: "Lap Nap Sanctuary 💆‍♂️❤️",
     caption: "The only acceptable place to collapse after an exhausting day. 🥺",
     secretNote: "Head scratches and quiet moments in your lap > literally anything else. 😌",
-    tag: "Cozy Moment"
+    tag: "MANIFESTING #06"
   },
   {
     id: "moment-guitar",
@@ -42,7 +58,7 @@ const futureMomentsData = [
     title: "Guitar Class Chaos 🎸😚",
     caption: "Us in the middle of a lesson... ended in 0% music and 100% distraction. 🤭",
     secretNote: "Still waiting for my student to learn a single chord instead of stealing kisses.",
-    tag: "Lesson #1"
+    tag: "MANIFESTING #07"
   },
   {
     id: "moment-midnight-date",
@@ -50,7 +66,7 @@ const futureMomentsData = [
     title: "Stolen Midnight Kisses 🍷✨",
     caption: "Late-night drinks, cozy corners, and stealing kisses when nobody is looking. 😌💋",
     secretNote: "Manifesting this exact date night with you very, very soon.",
-    tag: "Date Night"
+    tag: "MANIFESTING #08"
   },
   {
     id: "moment-cafe-stare",
@@ -58,7 +74,7 @@ const futureMomentsData = [
     title: "Lost in Your Eyes ☕❤️",
     caption: "Just me completely mesmerized while my favorite person talks about her day. 🥺✨",
     secretNote: "I could listen to you yap and tell random stories for hours and never get bored.",
-    tag: "Deep Talks"
+    tag: "MANIFESTING #09"
   },
   {
     id: "moment-tight-hug",
@@ -66,7 +82,7 @@ const futureMomentsData = [
     title: "The Reset Hug 🫂❤️",
     caption: "The kind of tight hug that makes everything else disappear. 🥺",
     secretNote: "When we finally get this hug in person, I'm genuinely not letting go for five minutes.",
-    tag: "Virtual to Real"
+    tag: "MANIFESTING #10"
   },
   {
     id: "moment-kitchen-hug",
@@ -74,7 +90,7 @@ const futureMomentsData = [
     title: "Kitchen Assistant 🍳😌",
     caption: "Stealing back-hugs and cheek kisses while you're trying to cook. 😚❤️",
     secretNote: "Zero cooking skills, but 10/10 dedication to annoying you in the kitchen.",
-    tag: "Future Routine"
+    tag: "MANIFESTING #11"
   },
   {
     id: "moment-muscle-drama",
@@ -82,7 +98,7 @@ const futureMomentsData = [
     title: "Tiny Menace Flex 💪😂",
     caption: "Me in absolute shock after witnessing your lethal bicep flex. 😱🚨",
     secretNote: "You think you're intimidating, Reet, but you're just adorable. (Please don't beat me up though). 😂❤️",
-    tag: "Pure Menace"
+    tag: "MANIFESTING #12"
   }
 ];
 

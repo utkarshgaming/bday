@@ -1060,16 +1060,17 @@
 }
 
 .polaroid-title {
-  font-size: 1.05rem;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.12rem;
   font-weight: 700;
-  color: var(--ink-charcoal);
-  margin-bottom: 4px;
+  color: #2E1820;
+  margin-bottom: 5px;
 }
 
 .polaroid-caption {
-  font-size: 0.85rem;
-  color: var(--sepia-dust);
-  line-height: 1.4;
+  font-size: 0.88rem;
+  color: #4A3B32;
+  line-height: 1.45;
 }
 
 .polaroid-flip-hint {
@@ -1106,11 +1107,12 @@
 }
 
 .secret-note-text {
-  font-family: var(--font-hand);
+  font-family: 'Caveat', cursive;
   font-size: 1.45rem;
   line-height: 1.5;
-  color: #3C3026;
+  color: #2E1820;
   margin: 16px 0;
+  white-space: pre-line;
 }
 
 .polaroid-back-footer {

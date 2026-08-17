@@ -472,15 +472,6 @@ function initLittleWorldArtifacts() {
       if (window.birthdayAudio) window.birthdayAudio.playGuitarPluck(idx);
     });
   });
-
-  // 7. White Lilies Herbarium
-  const herbarium = document.getElementById('artifact-herbarium');
-  if (herbarium) {
-    herbarium.addEventListener('click', (e) => {
-      if (window.birthdayAudio) window.birthdayAudio.playHarpGlissando();
-      if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 30);
-    });
-  }
 }
 
 /* --------------------------------------------------------------------------
