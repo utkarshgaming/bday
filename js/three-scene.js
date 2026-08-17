@@ -151,11 +151,11 @@ class Birthday3DScene {
       opacity: 0.85
     });
 
-    // Optimized particle counts: Mobile capped to ~24 total particles, Desktop to 78
-    const petalCount = this.isMobile ? 10 : 28;
-    const pinkHeartCount = this.isMobile ? 8 : 20;
-    const redHeartCount = this.isMobile ? 6 : 16;
-    const stardustCount = this.isMobile ? 4 : 14;
+    // Optimized particle counts: Mobile strictly capped to 20 total particles, Desktop to 78
+    const petalCount = this.isMobile ? 8 : 28;
+    const pinkHeartCount = this.isMobile ? 6 : 20;
+    const redHeartCount = this.isMobile ? 4 : 16;
+    const stardustCount = this.isMobile ? 2 : 14;
 
     // Spawn White Lily Petals
     for (let i = 0; i < petalCount; i++) {
@@ -274,10 +274,11 @@ class Birthday3DScene {
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.isMobile ? 1.5 : 2));
     });
 
-    // Pause rendering loop on tab background to preserve battery life
+    // Pause rendering loop on tab background to preserve battery life and GPU cycles
     document.addEventListener('visibilitychange', () => {
+      const wasPaused = this.isPaused;
       this.isPaused = (document.visibilityState === 'hidden');
-      if (!this.isPaused) {
+      if (wasPaused && !this.isPaused) {
         requestAnimationFrame(this.animate);
       }
     });
@@ -293,14 +294,6 @@ class Birthday3DScene {
         this.mouseTarget.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
       }
     }, { passive: true });
-
-    window.addEventListener('click', (e) => {
-      this.spawnBloomBurst(e.clientX, e.clientY, this.isMobile ? 12 : 24);
-    });
-
-    window.addEventListener('dblclick', (e) => {
-      this.spawnBloomBurst(e.clientX, e.clientY, this.isMobile ? 20 : 48);
-    });
   }
 
   animate() {

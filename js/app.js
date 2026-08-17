@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Only start the gatekeeper video initially to avoid double decoding
   const gatekeeperVideo = document.querySelector('#gatekeeper-overlay .hero-cinematic-video');
   if (gatekeeperVideo) {
-    gatekeeperVideo.play().catch(() => {});
+    gatekeeperVideo.play().catch(err => console.warn('Playback prevented:', err));
   }
 });
 
@@ -99,7 +99,7 @@ function initGatekeeper() {
     // Start envelope video now that gatekeeper is unlocked
     const envelopeVideo = document.getElementById('envelope-bg-video');
     if (envelopeVideo) {
-      envelopeVideo.play().catch(() => {});
+      envelopeVideo.play().catch(err => console.warn('Playback prevented:', err));
     }
 
     // Pause gatekeeper video to free resources
@@ -309,11 +309,11 @@ function initScrapbookSection() {
       </div>
     `;
 
-    // Touch & Click 3D Card Flip Handler (Scroll-safe, prevents double-toggle ghost click)
-    let touchStartX = 0;
-    let touchStartY = 0;
+    // Unified Pointer-Event 3D Card Flip Handler (Scroll-safe, prevents ghost double-flips)
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let isPointerDown = false;
     let hasScrolled = false;
-    let lastTouchTime = 0;
 
     const flipCard = (clientX, clientY) => {
       const inner = cardContainer.querySelector('.moment-card-inner') || cardContainer.querySelector('.polaroid-card-inner');
@@ -329,32 +329,31 @@ function initScrapbookSection() {
       }
     };
 
-    cardContainer.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
+    cardContainer.addEventListener('pointerdown', (e) => {
+      pointerStartX = e.clientX;
+      pointerStartY = e.clientY;
+      isPointerDown = true;
       hasScrolled = false;
-    }, { passive: true });
+    });
 
-    cardContainer.addEventListener('touchmove', (e) => {
-      const diffX = Math.abs(e.touches[0].clientX - touchStartX);
-      const diffY = Math.abs(e.touches[0].clientY - touchStartY);
-      if (diffX > 8 || diffY > 8) {
-        hasScrolled = true; // User is scrolling, do not flip
-      }
-    }, { passive: true });
-
-    cardContainer.addEventListener('touchend', (e) => {
-      if (!hasScrolled) {
-        lastTouchTime = Date.now();
-        const touch = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0] : null;
-        flipCard(touch ? touch.clientX : undefined, touch ? touch.clientY : undefined);
+    cardContainer.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const diffX = Math.abs(e.clientX - pointerStartX);
+      const diffY = Math.abs(e.clientY - pointerStartY);
+      if (diffX > 10 || diffY > 10) {
+        hasScrolled = true; // User is dragging/scrolling, cancel flip
       }
     });
 
-    // Desktop click support (guarded against synthetic mobile click)
-    cardContainer.addEventListener('click', (e) => {
-      if (Date.now() - lastTouchTime < 500) return; // Prevent ghost click on touch devices
-      flipCard(e.clientX, e.clientY);
+    cardContainer.addEventListener('pointerup', (e) => {
+      if (isPointerDown && !hasScrolled) {
+        flipCard(e.clientX, e.clientY);
+      }
+      isPointerDown = false;
+    });
+
+    cardContainer.addEventListener('pointercancel', () => {
+      isPointerDown = false;
     });
 
     grid.appendChild(cardContainer);
@@ -405,7 +404,11 @@ function initLittleWorldArtifacts() {
   const hugFill = document.getElementById('hug-meter-fill');
   const hugCountText = document.getElementById('hug-meter-count');
 
-  let hugCount = parseInt(localStorage.getItem('reet_hug_count') || '10819');
+  const rawHugs = localStorage.getItem('reet_hug_count');
+  let hugCount = parseInt(rawHugs, 10);
+  if (Number.isNaN(hugCount) || hugCount < 10819) {
+    hugCount = 10819;
+  }
   if (hugCountText) hugCountText.textContent = `${hugCount.toLocaleString()} Hugs`;
 
   if (hugBtn) {
@@ -514,7 +517,7 @@ function initGiftBox() {
     if (btnGiftPlay) {
       btnGiftPlay.addEventListener('click', () => {
         if (giftVideo.paused) {
-          giftVideo.play();
+          giftVideo.play().catch(err => console.warn('Playback prevented:', err));
         } else {
           giftVideo.pause();
         }
@@ -697,9 +700,11 @@ function initSwipeableDeck() {
     let currentX = 0;
     let currentY = 0;
     let isDragging = false;
+    let isHorizontalDrag = false;
 
     const onStart = (clientX, clientY) => {
       isDragging = true;
+      isHorizontalDrag = false;
       startX = clientX;
       startY = clientY;
       currentX = 0;
@@ -709,21 +714,37 @@ function initSwipeableDeck() {
 
     const onMove = (clientX, clientY) => {
       if (!isDragging) return;
-      currentX = clientX - startX;
-      currentY = clientY - startY;
-      const rotate = currentX * 0.08;
-      card.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${rotate}deg)`;
+      const dx = clientX - startX;
+      const dy = clientY - startY;
+
+      if (!isHorizontalDrag) {
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 6) {
+          isHorizontalDrag = true;
+        } else if (Math.abs(dy) > 10) {
+          // Vertical scroll in progress, cancel horizontal card dragging
+          isDragging = false;
+          return;
+        }
+      }
+
+      if (isHorizontalDrag) {
+        currentX = dx;
+        currentY = dy * 0.25; // soften vertical card shift
+        const rotate = currentX * 0.08;
+        card.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${rotate}deg)`;
+      }
     };
 
     const onEnd = () => {
-      if (!isDragging) return;
+      if (!isDragging && !isHorizontalDrag) return;
       isDragging = false;
-      const threshold = 80; // px threshold to trigger swipe
+      isHorizontalDrag = false;
+      const threshold = 75; // px threshold to trigger swipe
 
       if (Math.abs(currentX) > threshold) {
         // Swipe out
         const direction = currentX > 0 ? 1 : -1;
-        card.style.transition = 'transform 0.4s ease-out, opacity 0.3s ease-out';
+        card.style.transition = 'transform 0.35s ease-out, opacity 0.25s ease-out';
         card.style.transform = `translate3d(${direction * 400}px, ${currentY}px, 0) rotate(${direction * 30}deg)`;
         card.style.opacity = '0';
 
@@ -733,7 +754,7 @@ function initSwipeableDeck() {
         setTimeout(() => {
           currentIndex = (currentIndex + 1) % cardsData.length;
           renderDeck();
-        }, 350);
+        }, 320);
       } else {
         // Snap back to center
         card.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
@@ -741,30 +762,24 @@ function initSwipeableDeck() {
       }
     };
 
-    // Touch events for mobile
-    card.addEventListener('touchstart', (e) => {
-      onStart(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-
-    card.addEventListener('touchmove', (e) => {
-      onMove(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-
-    card.addEventListener('touchend', onEnd);
-    card.addEventListener('touchcancel', onEnd);
-
-    // Pointer events for desktop drag
+    // Unified Pointer Events (works seamlessly across iOS Safari, Android Chrome & Desktop)
     card.addEventListener('pointerdown', (e) => {
-      if (e.pointerType === 'touch') return; // Handled by touch events
       onStart(e.clientX, e.clientY);
-      const moveHandler = (ev) => onMove(ev.clientX, ev.clientY);
-      const upHandler = () => {
-        onEnd();
-        window.removeEventListener('pointermove', moveHandler);
-        window.removeEventListener('pointerup', upHandler);
-      };
-      window.addEventListener('pointermove', moveHandler);
-      window.addEventListener('pointerup', upHandler);
+      try { card.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      onMove(e.clientX, e.clientY);
+    });
+
+    card.addEventListener('pointerup', (e) => {
+      onEnd();
+      try { card.releasePointerCapture(e.pointerId); } catch (_) {}
+    });
+
+    card.addEventListener('pointercancel', (e) => {
+      onEnd();
+      try { card.releasePointerCapture(e.pointerId); } catch (_) {}
     });
   }
 

@@ -295,7 +295,7 @@ class BirthdayAudioEngine {
     } else {
       if (this.bgmAudio && this.isBgmPlaying) {
         this.bgmAudio.muted = false;
-        this.bgmAudio.play().catch(e => console.log(e));
+        this.bgmAudio.play().catch(err => console.warn('Playback prevented:', err));
       }
       if (this.masterGain && this.ctx) {
         this.masterGain.gain.setValueAtTime(0.8, this.ctx.currentTime);
