@@ -17,41 +17,55 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallaxCards();
   initGlobalHeartSpawner();
 
-  // Ensure all cinematic background videos start playing immediately
-  document.querySelectorAll('.hero-cinematic-video').forEach(video => {
-    video.play().catch(() => {});
-  });
+  // Only start the gatekeeper video initially to avoid double decoding
+  const gatekeeperVideo = document.querySelector('#gatekeeper-overlay .hero-cinematic-video');
+  if (gatekeeperVideo) {
+    gatekeeperVideo.play().catch(() => {});
+  }
 });
 
 function initGlobalHeartSpawner() {
   const heartIcons = ['❤️', '💖', '💕', '💗', '🤍', '✨', '🥺'];
   
-  const spawnHearts = (x, y, count = 4) => {
+  const spawnHearts = (x, y, count = 3) => {
     for (let i = 0; i < count; i++) {
       const heart = document.createElement('div');
       heart.className = 'screen-heart-particle';
       heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
       heart.style.left = `${x}px`;
       heart.style.top = `${y}px`;
-      heart.style.setProperty('--randX', `${(Math.random() - 0.5) * 90}px`);
-      heart.style.setProperty('--randRot', `${(Math.random() - 0.5) * 60}deg`);
+      heart.style.setProperty('--randX', `${(Math.random() - 0.5) * 80}px`);
+      heart.style.setProperty('--randRot', `${(Math.random() - 0.5) * 50}deg`);
       document.body.appendChild(heart);
 
-      setTimeout(() => heart.remove(), 1200);
+      setTimeout(() => heart.remove(), 1000);
     }
   };
 
+  let lastSpawn = 0;
+
   window.addEventListener('click', (e) => {
+    // Avoid double burst if clicking interactive buttons that already spawn 3D bursts
+    if (e.target.closest('button, .wax-seal, .gift-box-3d, .btn-hug-hold, #stamp-dial-btn, .polaroid-card-container')) {
+      return;
+    }
+    if (Date.now() - lastSpawn < 180) return;
+    lastSpawn = Date.now();
     spawnHearts(e.clientX, e.clientY, 3);
   });
 
   window.addEventListener('dblclick', (e) => {
-    spawnHearts(e.clientX, e.clientY, 12);
+    spawnHearts(e.clientX, e.clientY, 8);
   });
 
   window.addEventListener('touchstart', (e) => {
     if (e.touches.length > 0) {
-      spawnHearts(e.touches[0].clientX, e.touches[0].clientY, 4);
+      if (e.target.closest('button, .wax-seal, .gift-box-3d, .btn-hug-hold, #stamp-dial-btn, .polaroid-card-container')) {
+        return;
+      }
+      if (Date.now() - lastSpawn < 250) return;
+      lastSpawn = Date.now();
+      spawnHearts(e.touches[0].clientX, e.touches[0].clientY, 3);
     }
   }, { passive: true });
 }
@@ -81,9 +95,16 @@ function initGatekeeper() {
       window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 35);
     }
 
-    const cinematicVideo = document.querySelector('.hero-cinematic-video');
-    if (cinematicVideo && cinematicVideo.paused) {
-      cinematicVideo.play().catch(() => {});
+    // Start envelope video now that gatekeeper is unlocked
+    const envelopeVideo = document.getElementById('envelope-bg-video');
+    if (envelopeVideo) {
+      envelopeVideo.play().catch(() => {});
+    }
+
+    // Pause gatekeeper video to free resources
+    const gatekeeperVideo = document.querySelector('#gatekeeper-overlay .hero-cinematic-video');
+    if (gatekeeperVideo) {
+      gatekeeperVideo.pause();
     }
 
     // 🌅 Reveal the global sunset background
@@ -263,10 +284,25 @@ function initScrapbookSection() {
       </div>
     `;
 
-    // Touch & Click 3D Card Flip Handler (Scroll-safe, reliable 180° flip)
+    // Touch & Click 3D Card Flip Handler (Scroll-safe, prevents double-toggle ghost click)
     let touchStartX = 0;
     let touchStartY = 0;
     let hasScrolled = false;
+    let lastTouchTime = 0;
+
+    const flipCard = (clientX, clientY) => {
+      const inner = cardContainer.querySelector('.moment-card-inner') || cardContainer.querySelector('.polaroid-card-inner');
+      cardContainer.classList.toggle('flipped');
+      if (inner) {
+        inner.classList.toggle('is-flipped');
+      }
+      if (window.birthdayAudio) {
+        window.birthdayAudio.playChime(index % 8);
+      }
+      if (window.birthday3D && clientX !== undefined && clientY !== undefined) {
+        window.birthday3D.spawnBloomBurst(clientX, clientY, 15);
+      }
+    };
 
     cardContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
@@ -284,35 +320,16 @@ function initScrapbookSection() {
 
     cardContainer.addEventListener('touchend', (e) => {
       if (!hasScrolled) {
-        const inner = cardContainer.querySelector('.moment-card-inner') || cardContainer.querySelector('.polaroid-card-inner');
-        cardContainer.classList.toggle('flipped');
-        if (inner) {
-          inner.classList.toggle('is-flipped');
-        }
-        if (window.birthdayAudio) {
-          window.birthdayAudio.playChime(index % 8);
-        }
-        if (window.birthday3D && e.changedTouches && e.changedTouches[0]) {
-          window.birthday3D.spawnBloomBurst(e.changedTouches[0].clientX, e.changedTouches[0].clientY, 15);
-        }
+        lastTouchTime = Date.now();
+        const touch = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0] : null;
+        flipCard(touch ? touch.clientX : undefined, touch ? touch.clientY : undefined);
       }
     });
 
-    // Desktop click support
+    // Desktop click support (guarded against synthetic mobile click)
     cardContainer.addEventListener('click', (e) => {
-      if (e.pointerType !== 'touch') {
-        const inner = cardContainer.querySelector('.moment-card-inner') || cardContainer.querySelector('.polaroid-card-inner');
-        cardContainer.classList.toggle('flipped');
-        if (inner) {
-          inner.classList.toggle('is-flipped');
-        }
-        if (window.birthdayAudio) {
-          window.birthdayAudio.playChime(index % 8);
-        }
-        if (window.birthday3D) {
-          window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 15);
-        }
-      }
+      if (Date.now() - lastTouchTime < 500) return; // Prevent ghost click on touch devices
+      flipCard(e.clientX, e.clientY);
     });
 
     grid.appendChild(cardContainer);
@@ -381,13 +398,33 @@ function initLittleWorldArtifacts() {
     });
   }
 
-  // 4. Cheek Kiss Promissory Ticket
+  // 4. Cheek Kiss Promissory Ticket (Custom Modal)
   const kissTicket = document.getElementById('cheek-kiss-ticket');
+  const kissModal = document.getElementById('kiss-ticket-modal');
+  const kissModalClose = document.getElementById('kiss-modal-close');
+
   if (kissTicket) {
     kissTicket.addEventListener('click', (e) => {
       if (window.birthdayAudio) window.birthdayAudio.playHarpGlissando();
       if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 25);
-      alert("Cheek kiss successfully marked for in-person redemption! 😌😘 (Non-negotiable!)");
+      if (kissModal) {
+        kissModal.classList.add('active');
+      }
+    });
+  }
+
+  if (kissModalClose && kissModal) {
+    kissModalClose.addEventListener('click', () => {
+      kissModal.classList.remove('active');
+      if (window.birthdayAudio) window.birthdayAudio.playChime(5);
+    });
+  }
+
+  if (kissModal) {
+    kissModal.addEventListener('click', (e) => {
+      if (e.target === kissModal) {
+        kissModal.classList.remove('active');
+      }
     });
   }
 

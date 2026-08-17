@@ -2049,6 +2049,88 @@
 }
 
 /* --------------------------------------------------------------------------
+   💋 CHEEK KISS CONFIRMATION MODAL
+   -------------------------------------------------------------------------- */
+.kiss-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(38, 30, 46, 0.92) 0%, rgba(20, 16, 25, 0.96) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 10015;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.kiss-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.kiss-ticket-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 240, 245, 0.94) 100%);
+  border: 2px solid var(--sweetheart-pink);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 60px rgba(230, 57, 70, 0.35), 0 0 35px rgba(255, 117, 143, 0.3);
+  max-width: 420px;
+  width: 100%;
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  transform: scale(0.9) translateY(15px);
+  transition: transform 0.4s var(--spring-bounce);
+}
+
+.kiss-modal-overlay.active .kiss-ticket-card {
+  transform: scale(1) translateY(0);
+}
+
+.kiss-ticket-badge {
+  display: inline-block;
+  background: rgba(230, 57, 70, 0.12);
+  color: var(--crimson-rose);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 14px;
+  border: 1px solid rgba(230, 57, 70, 0.25);
+}
+
+.kiss-icon-anim {
+  font-size: 3.2rem;
+  margin-bottom: 12px;
+  animation: heartBeat 1.8s infinite;
+}
+
+.kiss-ticket-title {
+  font-size: 1.8rem;
+  color: var(--romantic-charcoal);
+  margin-bottom: 12px;
+}
+
+.kiss-ticket-desc {
+  font-family: var(--font-editorial);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink-charcoal);
+  margin-bottom: 18px;
+}
+
+.kiss-ticket-seal {
+  font-size: 1.7rem;
+  color: var(--crimson-rose);
+  margin-bottom: 6px;
+}
+
+/* --------------------------------------------------------------------------
    🎸 ACOUSTIC GUITAR BIRTHDAY PERFORMANCE MODAL & PLAYER
    -------------------------------------------------------------------------- */
 
