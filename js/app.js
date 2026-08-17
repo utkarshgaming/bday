@@ -152,6 +152,13 @@ function initEnvelopeCeremony() {
 
     envelope.classList.add('opened');
 
+    // 🌅 Fade in the global romantic sunset background
+    const bgContainer = document.getElementById('site-post-envelope-bg');
+    if (bgContainer) {
+      bgContainer.classList.remove('is-hidden');
+      bgContainer.classList.add('is-visible');
+    }
+
     setTimeout(() => {
       const hero = document.getElementById('hero-monument');
       if (hero) {

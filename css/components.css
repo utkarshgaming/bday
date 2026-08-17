@@ -3,6 +3,50 @@
    Interactive Components, 3D Layers & Physical Tactile Modules
    ========================================================================== */
 
+/* ==========================================================================
+   🌅 POST-ENVELOPE GLOBAL SITE SUNSET BACKGROUND
+   ========================================================================== */
+.global-site-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.global-site-bg.is-visible {
+  opacity: 1;
+}
+
+/* Background Image Sizing & Atmospheric Grade */
+.global-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/4e09081d5661ea028006f991711e5ea1.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.85) contrast(1.05);
+}
+
+/* Contrast & Scrim Overlay for Readability */
+.global-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(29, 19, 34, 0.35) 0%,
+    rgba(29, 19, 34, 0.7) 65%,
+    rgba(20, 12, 24, 0.9) 100%
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
 /* --------------------------------------------------------------------------
    🌸 4.0 THE PLAYFUL GATEKEEPER (Cute Exclusivity Gate)
    -------------------------------------------------------------------------- */
