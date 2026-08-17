@@ -846,7 +846,6 @@ function initAugust19Countdown() {
   const minsEl = document.getElementById('cd-mins');
   const secsEl = document.getElementById('cd-secs');
   const celebrationTitle = document.getElementById('birthday-banner-title');
-  const btnFinalHug = document.getElementById('btn-final-hug');
 
   function updateCountdown() {
     const now = new Date();
@@ -882,12 +881,6 @@ function initAugust19Countdown() {
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
-
-  if (btnFinalHug) {
-    btnFinalHug.addEventListener('click', (e) => {
-      openOfficialBirthdayHugModal(e.clientX, e.clientY);
-    });
-  }
 }
 
 /* --------------------------------------------------------------------------
