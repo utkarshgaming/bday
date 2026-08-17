@@ -218,18 +218,18 @@ body::before {
   100% { transform: translate(calc(-50% + var(--randX, 0px)), calc(-50% - 120px)) scale(0.6) rotate(calc(var(--randRot, 10deg) * 2)); opacity: 0; }
 }
 
-/* Typography Utilities */
-h1, h2, h3, .section-title, .hero-title, .display-header {
+/* Direct-on-Background Typography Utilities */
+.section-title, .hero-title, .display-header {
   font-family: var(--font-serif);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-heading-bright);
-  text-shadow: var(--shadow-text-subtle);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
-h4, h5, .subtitle, .section-subtitle {
-  color: var(--text-heading-pink);
-  text-shadow: var(--shadow-text-subtle);
+.subtitle, .section-subtitle {
+  color: #FFE4E8;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .font-editorial {
@@ -245,25 +245,26 @@ h4, h5, .subtitle, .section-subtitle {
   font-family: var(--font-script);
 }
 
-/* Luxury Editorial Section Header */
-.section-tag, .pill-badge, .section-badge {
+/* Luxury Editorial Section Header & Pill Badges */
+.section-tag, .pill-badge, .section-badge, .category-tag, .category-pill, .hero-badge-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 6px 18px;
-  background: rgba(255, 117, 143, 0.2) !important;
-  border: 1px solid rgba(255, 182, 193, 0.45) !important;
-  border-radius: var(--radius-full);
+  background: rgba(255, 228, 233, 0.95) !important;
+  color: #B83253 !important; /* Rich deep crimson-rose for clear contrast */
   font-family: var(--font-sans);
   font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #FFE4E9 !important;
-  margin-bottom: 1rem;
+  border: 1.5px solid rgba(217, 126, 140, 0.45) !important;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(184, 50, 83, 0.15) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 14px rgba(255, 117, 143, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: none !important;
+  margin-bottom: 1rem;
 }
 
 .section-tag::before {
@@ -276,17 +277,139 @@ h4, h5, .subtitle, .section-subtitle {
   line-height: 1.15;
   margin-bottom: 1rem;
   color: var(--text-heading-bright);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 117, 143, 0.35);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .section-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-heading-pink);
+  color: #FFE4E8;
   max-width: 620px;
   margin: 0 auto;
   font-weight: 400;
   line-height: 1.6;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   🌸 SCOPED LIGHT CARD TEXT RULES (Contextual Contrast Protection)
+   -------------------------------------------------------------------------- */
+.memory-card,
+.moment-card-container,
+.polaroid-card-container,
+.polaroid-front,
+.polaroid-back,
+.moment-card-front,
+.moment-card-back,
+.flip-card-front,
+.flip-card-back,
+.deckle-card,
+.artifact-card,
+.voucher-card,
+.like-note-card,
+.deck-card,
+.poem-parchment-sheet,
+.core-letter-parchment,
+.envelope-letter,
+.gift-guitar-showcase,
+.kiss-ticket-card,
+.dictionary-box,
+.specimen-glass,
+.lightbox-content {
+  color: #2E1820 !important;
+}
+
+.memory-card h2, .memory-card h3, .memory-card h4,
+.polaroid-card-container h2, .polaroid-card-container h3, .polaroid-card-container h4,
+.polaroid-front h2, .polaroid-front h3, .polaroid-front h4,
+.polaroid-title,
+.moment-card-front h3,
+.flip-card-front h3,
+.deckle-card h2, .deckle-card h3, .deckle-card h4,
+.artifact-card h2, .artifact-card h3, .artifact-card h4,
+.artifact-title,
+.voucher-card h2, .voucher-card h3, .voucher-card h4,
+.voucher-title,
+.like-note-card h2, .like-note-card h3, .like-note-card h4,
+.deck-card h2, .deck-card h3, .deck-card h4,
+.deck-card-question,
+.poem-parchment-sheet h2, .poem-parchment-sheet h3,
+.core-letter-parchment h2, .core-letter-parchment h3,
+.letter-heading,
+.envelope-letter h2, .envelope-letter h3,
+.gift-guitar-showcase h2, .gift-guitar-showcase h3,
+.kiss-ticket-card h2, .kiss-ticket-card h3,
+.kiss-ticket-title,
+.lightbox-content h2, .lightbox-content h3 {
+  color: #2E1820 !important;
+  text-shadow: none !important;
+  font-weight: 700;
+}
+
+.memory-card p,
+.polaroid-card-container p,
+.polaroid-front p,
+.polaroid-caption,
+.moment-card-front p,
+.flip-card-front p,
+.deckle-card p,
+.artifact-card p,
+.artifact-desc,
+.voucher-card p,
+.like-note-card p,
+.like-text,
+.deck-card p,
+.poem-lines,
+.poem-line,
+.core-letter-parchment p,
+.letter-body-p,
+.envelope-letter p,
+.gift-guitar-showcase p,
+.kiss-ticket-card p,
+.kiss-ticket-desc,
+.lightbox-content p {
+  color: #5E3D48 !important;
+  text-shadow: none !important;
+  line-height: 1.6;
+}
+
+.tag,
+.number-indicator,
+.artifact-num,
+.voucher-terms,
+.deck-card-badge,
+.dict-term {
+  color: #9C6374 !important;
+  text-shadow: none !important;
+}
+
+.polaroid-tag-badge {
+  background: rgba(255, 228, 233, 0.95) !important;
+  color: #B83253 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.polaroid-flip-hint {
+  color: #D6336C !important;
+  text-shadow: none !important;
+  font-weight: 700;
+}
+
+.secret-note-text {
+  color: #2E1820 !important;
+  text-shadow: none !important;
+  font-family: var(--font-hand), 'Caveat', cursive !important;
+}
+
+.signature,
+.polaroid-back-footer,
+.letter-signoff,
+.poem-annotation,
+.kiss-ticket-seal {
+  color: #D6336C !important;
+  text-shadow: none !important;
+  font-family: var(--font-hand), 'Caveat', cursive !important;
 }
 
 /* Glassmorphism & Rose-Gold Tactile Card Utility */

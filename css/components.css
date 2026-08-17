@@ -271,7 +271,7 @@
 .envelope-intro-text {
   text-align: center;
   max-width: 580px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   position: relative;
   z-index: 2;
 }
@@ -279,13 +279,13 @@
 .hero-cinematic-wrapper .envelope-intro-text h2 {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   margin-bottom: 8px;
-  color: #FFFDF9;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
 }
 
 .hero-cinematic-wrapper .envelope-intro-text .section-subtitle {
-  color: #F8E2E8;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  color: #FFE4E8;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
 }
 
 .hero-cinematic-wrapper .wax-seal-hint {
@@ -361,7 +361,7 @@
   left: 5%;
   width: 90%;
   height: 260px;
-  background: rgba(255, 255, 255, 0.95);
+  background: #FFFDF9 !important;
   border-radius: 8px;
   padding: 24px 20px;
   box-shadow: 0 4px 15px rgba(230, 57, 70, 0.1);
@@ -373,6 +373,27 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.envelope-letter h3 {
+  color: #C2255C !important;
+  text-shadow: none !important;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.envelope-letter p {
+  font-size: 1.15rem;
+  color: #3A242B !important;
+  line-height: 1.5;
+  text-shadow: none !important;
+}
+
+.envelope-letter span.font-hand {
+  color: #D6336C !important;
+  text-shadow: none !important;
+  margin-top: 10px;
+  font-size: 1.2rem;
 }
 
 .envelope-wrapper.opened .envelope-letter {
@@ -477,19 +498,20 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 117, 143, 0.2);
-  border: 1px solid rgba(255, 182, 193, 0.45);
-  box-shadow: 0 0 14px rgba(255, 117, 143, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 228, 233, 0.95) !important;
+  border: 1.5px solid rgba(217, 126, 140, 0.45) !important;
+  box-shadow: 0 2px 8px rgba(184, 50, 83, 0.15) !important;
   padding: 8px 24px;
   border-radius: var(--radius-full);
   font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #FFE4E9;
+  color: #B83253 !important;
   margin-bottom: 24px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  text-shadow: none !important;
 }
 
 .hero-title {
