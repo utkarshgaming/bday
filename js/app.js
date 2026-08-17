@@ -465,7 +465,15 @@ function initLittleWorldArtifacts() {
     });
   }
 
-  // 6. White Lilies Herbarium
+  // 6. Guitar Masterclass Pluck
+  const strings = document.querySelectorAll('.guitar-string');
+  strings.forEach((str, idx) => {
+    str.addEventListener('click', () => {
+      if (window.birthdayAudio) window.birthdayAudio.playGuitarPluck(idx);
+    });
+  });
+
+  // 7. White Lilies Herbarium
   const herbarium = document.getElementById('artifact-herbarium');
   if (herbarium) {
     herbarium.addEventListener('click', (e) => {
