@@ -147,8 +147,36 @@
     <section class="hero-section" id="hero-monument">
       <div class="hero-background-monument">19 • 08</div>
       <div class="hero-content">
-        <div class="hero-badge-pill">19 August • Reet's Special Day</div>
-        <h1 class="hero-title">Happy Birthday, <span>Reet. ❤️</span><span class="pulsing-heart-badge">❤️</span></h1>
+        <div class="hero-badge-pill date-pill-badge">19 August • Reet's Special Day</div>
+        <h1 class="hero-title birthday-hero-title">Happy Birthday, <span class="name-highlight">Reet.</span></h1>
+        
+        <div class="magical-hearts-container">
+          <div class="magical-heart heart-left">
+            <svg viewBox="0 0 32 32" class="heart-svg">
+              <defs>
+                <radialGradient id="rubyGlow" cx="30%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#FF9EAA" />
+                  <stop offset="40%" stop-color="#FF4D6D" />
+                  <stop offset="100%" stop-color="#A4133C" />
+                </radialGradient>
+                <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="2.5" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <path fill="url(#rubyGlow)" filter="url(#softGlow)" d="M16,28.261c0,0-14-7.926-14-17.046c0-9.356,13.159-10.399,14-0.454c0.841-9.945,14-8.902,14,0.454 C30,20.335,16,28.261,16,28.261z"/>
+            </svg>
+            <div class="sparkle-orbit">✨</div>
+          </div>
+
+          <div class="magical-heart heart-right">
+            <svg viewBox="0 0 32 32" class="heart-svg">
+              <path fill="url(#rubyGlow)" filter="url(#softGlow)" d="M16,28.261c0,0-14-7.926-14-17.046c0-9.356,13.159-10.399,14-0.454c0.841-9.945,14-8.902,14,0.454 C30,20.335,16,28.261,16,28.261z"/>
+            </svg>
+            <div class="sparkle-orbit delay">✨</div>
+          </div>
+        </div>
+
         <p class="hero-caption">
           Because a standard birthday text was never going to be enough for someone like you. 🤭
         </p>

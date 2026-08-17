@@ -641,48 +641,146 @@
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 850px;
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Date Pill Badge Polishing */
+.date-pill-badge,
 .hero-badge-pill {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 228, 233, 0.95) !important;
-  border: 1.5px solid rgba(217, 126, 140, 0.45) !important;
-  box-shadow: 0 2px 8px rgba(184, 50, 83, 0.15) !important;
-  padding: 8px 24px;
-  border-radius: var(--radius-full);
-  font-size: 0.82rem;
+  background: rgba(255, 235, 240, 0.92) !important;
+  color: #C2185B !important;
+  border: 1.5px solid rgba(255, 143, 163, 0.5) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
   font-weight: 700 !important;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #B83253 !important;
-  margin-bottom: 24px;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  padding: 7px 22px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 4px 18px rgba(194, 24, 91, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  margin-bottom: 16px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   text-shadow: none !important;
 }
 
+/* Main Hero Title Container */
+.birthday-hero-title,
 .hero-title {
-  font-size: clamp(2.8rem, 7.5vw, 5.5rem);
-  line-height: 1.08;
-  font-weight: 900;
-  margin-bottom: 20px;
-  color: #FFFFFF;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 117, 143, 0.35);
+  font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(2.6rem, 7vw, 5.2rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  text-align: center !important;
+  margin: 12px 0 6px 0 !important;
+  
+  /* Luminous Silver-Blush to Ivory Gradient */
+  background: linear-gradient(135deg, #FFFFFF 20%, #FFE3EC 60%, #FFB6C1 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 18px rgba(255, 117, 143, 0.45))
+          drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6)) !important;
 }
 
+/* "Reet" Name Accent Styling */
+.birthday-hero-title .name-highlight,
+.hero-title .name-highlight,
 .hero-title span {
-  color: var(--sweetheart-pink);
-  text-shadow: 0 0 16px rgba(255, 117, 143, 0.6);
+  font-family: 'Caveat', cursive !important;
+  font-size: 1.25em !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  display: inline-block !important;
+  margin-left: 6px !important;
+  
+  /* Glowing Ruby-Rose Gold Gradient */
+  background: linear-gradient(135deg, #FF6B8B 0%, #FF8E9E 50%, #FFD1DC 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 14px rgba(255, 107, 139, 0.7)) !important;
+  animation: gentle-pulse 3s ease-in-out infinite alternate !important;
+}
+
+@keyframes gentle-pulse {
+  0% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 12px rgba(255, 107, 139, 0.5)); }
+  100% { transform: scale(1.04) rotate(1deg); filter: drop-shadow(0 0 22px rgba(255, 107, 139, 0.85)); }
+}
+
+/* Hearts Wrapper & Float Animations */
+.magical-hearts-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 10px 0 22px 0;
+}
+
+.magical-heart {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 6px 18px rgba(255, 77, 109, 0.6));
+  animation: floatHeart 3.6s ease-in-out infinite alternate;
+}
+
+.magical-heart.heart-left {
+  transform: rotate(-10deg);
+}
+
+.magical-heart.heart-right {
+  transform: rotate(12deg);
+  animation-delay: 1.2s;
+}
+
+.heart-svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.magical-heart:hover .heart-svg {
+  transform: scale(1.2) rotate(6deg);
+}
+
+/* Floating Sparkle Micro-Accents */
+.sparkle-orbit {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-size: 14px;
+  animation: twinkle 2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.sparkle-orbit.delay {
+  top: auto;
+  bottom: -4px;
+  left: -4px;
+  animation-delay: 1s;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0px) rotate(-8deg); }
+  100% { transform: translateY(-12px) rotate(4deg); }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
 }
 
 .hero-caption {
-  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
   color: #FFE4E9;
   max-width: 640px;
-  margin: 0 auto 36px;
+  margin: 0 auto 30px;
   font-weight: 400;
   line-height: 1.6;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
