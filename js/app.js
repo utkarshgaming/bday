@@ -311,7 +311,6 @@ function initScrapbookSection() {
           <!-- Back (Secret Sticky Note) -->
           <div class="moment-card-back polaroid-back">
             <p class="secret-note-text">"${item.secretNote}"</p>
-            <div class="polaroid-back-footer">CONFIDENTIAL NOTE // 08•19 ❤️</div>
           </div>
         </div>
       </div>

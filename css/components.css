@@ -670,7 +670,7 @@
   text-shadow: none !important;
 }
 
-/* Main Hero Title Container */
+/* Main Hero Title Container - Crisp Bright White (No Murky Grays) */
 .birthday-hero-title,
 .hero-title-main,
 .hero-title {
@@ -683,18 +683,18 @@
   text-align: center !important;
   margin: 12px 0 6px 0 !important;
   
-  /* Luminous Pure White to Champagne-Rose Gradient (No Murky Grays) */
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFF0F3 55%, #FFD6E0 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  
-  /* Glowing Multilayer Halo */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7))
-          drop-shadow(0 0 20px rgba(255, 182, 193, 0.6))
-          drop-shadow(0 0 45px rgba(255, 77, 109, 0.35)) !important;
+  /* Pure Solid Crisp White (No Gray/Translucent Gradient) */
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  background: none !important;
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 35px rgba(255, 182, 193, 0.4) !important;
+  filter: none !important;
 }
 
-/* "Reet" Name Accent Styling */
+/* "Reet" Name Accent Styling - Vivid Glowing Strawberry-Pink */
 .birthday-hero-title .name-highlight,
 .hero-title-main em,
 .hero-title-main .reet-highlight,
@@ -707,30 +707,32 @@
   display: inline-block;
   margin-left: 8px;
   
-  /* Vivid Radiant Strawberry-Ruby Gradient */
-  background: linear-gradient(135deg, #FF3366 0%, #FF5E7E 50%, #FFA8BA 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  
-  /* Vibrant Neon-Rose Aura */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
-          drop-shadow(0 0 16px rgba(255, 51, 102, 0.85))
-          drop-shadow(0 0 32px rgba(255, 107, 139, 0.5)) !important;
+  /* Vivid Glowing Pink */
+  color: #FF3366 !important;
+  -webkit-text-fill-color: #FF3366 !important;
+  background: none !important;
+  text-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(255, 51, 102, 0.85),
+    0 0 32px rgba(255, 107, 139, 0.5) !important;
+  filter: none !important;
   animation: gentle-pulse 3s ease-in-out infinite alternate !important;
 }
 
 @keyframes gentle-pulse {
   0% {
     transform: scale(1) rotate(-1deg);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
-            drop-shadow(0 0 14px rgba(255, 51, 102, 0.75))
-            drop-shadow(0 0 28px rgba(255, 107, 139, 0.45));
+    text-shadow: 
+      0 2px 6px rgba(0, 0, 0, 0.8),
+      0 0 14px rgba(255, 51, 102, 0.8),
+      0 0 28px rgba(255, 107, 139, 0.45);
   }
   100% {
     transform: scale(1.04) rotate(1deg);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
-            drop-shadow(0 0 22px rgba(255, 51, 102, 0.95))
-            drop-shadow(0 0 40px rgba(255, 107, 139, 0.7));
+    text-shadow: 
+      0 2px 6px rgba(0, 0, 0, 0.8),
+      0 0 22px rgba(255, 51, 102, 0.95),
+      0 0 40px rgba(255, 107, 139, 0.7);
   }
 }
 

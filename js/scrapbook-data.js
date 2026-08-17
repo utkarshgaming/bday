@@ -47,7 +47,7 @@ const futureMomentsData = [
   {
     id: "moment-lap-nap",
     file: "IMG_8003.JPG",
-    title: "Lap Nap Sanctuary 💆‍♂️❤️",
+    title: "Lap Nap 💆‍♀️❤️",
     caption: "The only acceptable place to collapse after an exhausting day. 🥺",
     secretNote: "Head scratches and quiet moments in your lap > literally anything else. 😌",
     tag: "MANIFESTING #06"
