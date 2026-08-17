@@ -532,32 +532,46 @@ h1 em, h2 em, h3 em, .section-title em, .hero-title span, .italic-accent {
   position: fixed;
   bottom: max(20px, env(safe-area-inset-bottom, 20px));
   right: max(16px, env(safe-area-inset-right, 16px));
-  z-index: 900;
+  z-index: 9999;
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid var(--card-glass-border);
+  background: rgba(30, 16, 36, 0.82);
+  border: 1.5px solid rgba(255, 182, 193, 0.35);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 8px 16px;
+  padding: 6px 14px 6px 6px;
   border-radius: var(--radius-full);
-  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.12), 0 4px 12px rgba(255, 117, 143, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s var(--spring-bounce), box-shadow 0.3s ease;
   animation: ambientBarPulse 3.5s ease-in-out infinite;
 }
 
 @media (max-width: 640px) {
   .ambient-sound-bar {
-    padding: 6px 12px;
-    gap: 8px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    box-shadow: none;
     bottom: max(14px, env(safe-area-inset-bottom, 14px));
     right: max(12px, env(safe-area-inset-right, 12px));
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    gap: 0;
   }
-  .sound-label {
-    display: none;
+  
+  .sound-info,
+  .sound-waves {
+    display: none !important;
+  }
+
+  .sound-toggle-btn {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    box-shadow: 0 4px 16px rgba(230, 57, 70, 0.5) !important;
   }
 }
 
