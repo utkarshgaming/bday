@@ -672,45 +672,66 @@
 
 /* Main Hero Title Container */
 .birthday-hero-title,
+.hero-title-main,
 .hero-title {
-  font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif !important;
-  font-size: clamp(2.6rem, 7vw, 5.2rem) !important;
-  font-weight: 600 !important;
-  line-height: 1.15 !important;
-  letter-spacing: -0.02em !important;
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-optical-sizing: auto;
+  font-weight: 700 !important;
+  font-size: clamp(2.8rem, 8vw, 5.4rem) !important;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   text-align: center !important;
   margin: 12px 0 6px 0 !important;
   
-  /* Luminous Silver-Blush to Ivory Gradient */
-  background: linear-gradient(135deg, #FFFFFF 20%, #FFE3EC 60%, #FFB6C1 100%) !important;
+  /* Luminous Pure White to Champagne-Rose Gradient (No Murky Grays) */
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF0F3 55%, #FFD6E0 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  filter: drop-shadow(0 4px 18px rgba(255, 117, 143, 0.45))
-          drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6)) !important;
+  
+  /* Glowing Multilayer Halo */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 20px rgba(255, 182, 193, 0.6))
+          drop-shadow(0 0 45px rgba(255, 77, 109, 0.35)) !important;
 }
 
 /* "Reet" Name Accent Styling */
 .birthday-hero-title .name-highlight,
+.hero-title-main em,
+.hero-title-main .reet-highlight,
 .hero-title .name-highlight,
 .hero-title span {
   font-family: 'Caveat', cursive !important;
-  font-size: 1.25em !important;
-  font-style: italic !important;
+  font-size: 1.3em !important;
   font-weight: 700 !important;
-  display: inline-block !important;
-  margin-left: 6px !important;
+  font-style: normal !important;
+  display: inline-block;
+  margin-left: 8px;
   
-  /* Glowing Ruby-Rose Gold Gradient */
-  background: linear-gradient(135deg, #FF6B8B 0%, #FF8E9E 50%, #FFD1DC 100%) !important;
+  /* Vivid Radiant Strawberry-Ruby Gradient */
+  background: linear-gradient(135deg, #FF3366 0%, #FF5E7E 50%, #FFA8BA 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  filter: drop-shadow(0 0 14px rgba(255, 107, 139, 0.7)) !important;
+  
+  /* Vibrant Neon-Rose Aura */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
+          drop-shadow(0 0 16px rgba(255, 51, 102, 0.85))
+          drop-shadow(0 0 32px rgba(255, 107, 139, 0.5)) !important;
   animation: gentle-pulse 3s ease-in-out infinite alternate !important;
 }
 
 @keyframes gentle-pulse {
-  0% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 12px rgba(255, 107, 139, 0.5)); }
-  100% { transform: scale(1.04) rotate(1deg); filter: drop-shadow(0 0 22px rgba(255, 107, 139, 0.85)); }
+  0% {
+    transform: scale(1) rotate(-1deg);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
+            drop-shadow(0 0 14px rgba(255, 51, 102, 0.75))
+            drop-shadow(0 0 28px rgba(255, 107, 139, 0.45));
+  }
+  100% {
+    transform: scale(1.04) rotate(1deg);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
+            drop-shadow(0 0 22px rgba(255, 51, 102, 0.95))
+            drop-shadow(0 0 40px rgba(255, 107, 139, 0.7));
+  }
 }
 
 /* Hearts Wrapper & Float Animations */
