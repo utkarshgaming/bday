@@ -613,17 +613,29 @@
 
   </main>
 
-  <!-- 🫂 Warm Embrace Golden Bloom Screen -->
-  <div id="hug-bloom-overlay">
-    <div class="bloom-card-container">
+  <!-- 🫂 Warm Embrace Golden Bloom Screen / Official Birthday Hug Modal -->
+  <div id="hug-bloom-overlay" class="hug-modal-overlay">
+    <video
+      id="hug-modal-video"
+      class="hug-modal-bg-video"
+      muted
+      loop
+      playsinline
+      preload="none"
+    >
+      <source src="assets/153999-806572025.mp4" type="video/mp4" />
+    </video>
+    <div class="hug-modal-scrim"></div>
+
+    <div class="bloom-card-container hug-card-container">
       <div class="bloom-photo-frame">
         <img src="assets/images/hug_sunset.jpg" alt="Our Warm Embrace" class="bloom-hug-image" loading="lazy" decoding="async" onerror="this.src='assets/images/cc5294265d99b03b3748a7155606b95b.jpg'">
-        <div class="bloom-photo-badge">Official Birthday Hug 🫂✨</div>
+        <div class="bloom-photo-badge">OFFICIAL BIRTHDAY HUG 🫂✨</div>
       </div>
       <div class="bloom-text-content">
         <h2 class="bloom-title">Come here, birthday girl. 🫂❤️</h2>
         <p class="bloom-subtitle">Mwuahhh 😚</p>
-        <p style="font-size: 1.2rem; color: var(--crimson-rose); font-weight: 700; margin: 10px 0 6px;">Happy Birthdayyyyy, Reet ❤️</p>
+        <p style="font-size: 1.25rem; color: var(--crimson-rose); font-weight: 700; margin: 10px 0 6px;">Happy Birthday MY Babyyy ❤️</p>
         <p class="bloom-signature">— your Uttu puttu ❤️</p>
         <button id="bloom-close-btn" class="btn-primary btn-gold" style="margin-top: 12px; padding: 12px 28px;">
           Hold Hug in Memory ❤️

@@ -423,7 +423,7 @@ function initLittleWorldArtifacts() {
       }
 
       if (window.birthdayAudio) window.birthdayAudio.playChime(4);
-      if (window.birthday3D) window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 16);
+      openOfficialBirthdayHugModal(e.clientX, e.clientY);
     });
   }
 
@@ -563,8 +563,58 @@ function initGiftBox() {
 }
 
 /* --------------------------------------------------------------------------
-   🫂 4.6 THE 3-SECOND "WARM EMBRACE" VIRTUAL HUG
+   🫂 4.6 THE 3-SECOND "WARM EMBRACE" VIRTUAL HUG & UNIFIED MODAL OPENER
    -------------------------------------------------------------------------- */
+function openOfficialBirthdayHugModal(clientX, clientY) {
+  const hugModal = document.getElementById('hug-bloom-overlay') || document.getElementById('official-hug-modal');
+  const modalVideo = document.getElementById('hug-modal-video');
+
+  if (hugModal) {
+    hugModal.classList.remove('hidden');
+    hugModal.classList.add('active', 'is-active');
+
+    if (modalVideo) {
+      modalVideo.currentTime = 0;
+      modalVideo.play().catch(err => console.warn('Modal video play prevented:', err));
+    }
+
+    if (window.birthdayAudio) {
+      window.birthdayAudio.playHarpGlissando();
+    }
+    if (window.birthday3D) {
+      const spawnX = (clientX !== undefined && clientX > 0) ? clientX : window.innerWidth / 2;
+      const spawnY = (clientY !== undefined && clientY > 0) ? clientY : window.innerHeight / 2;
+      window.birthday3D.spawnBloomBurst(spawnX, spawnY, 60);
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          window.birthday3D.spawnBloomBurst(
+            window.innerWidth * (0.25 + Math.random() * 0.5),
+            window.innerHeight * (0.25 + Math.random() * 0.5),
+            20
+          );
+        }, (i + 1) * 150);
+      }
+    }
+  }
+}
+window.openOfficialBirthdayHugModal = openOfficialBirthdayHugModal;
+
+function closeOfficialBirthdayHugModal() {
+  const hugModal = document.getElementById('hug-bloom-overlay') || document.getElementById('official-hug-modal');
+  const modalVideo = document.getElementById('hug-modal-video');
+
+  if (hugModal) {
+    hugModal.classList.remove('active', 'is-active');
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+    if (window.birthdayAudio) {
+      window.birthdayAudio.playChime(5);
+    }
+  }
+}
+window.closeOfficialBirthdayHugModal = closeOfficialBirthdayHugModal;
+
 function initVirtualHugHold() {
   const hugBtn = document.getElementById('btn-hug-hold');
   const circle = document.getElementById('hug-progress-circle');
@@ -615,14 +665,7 @@ function initVirtualHugHold() {
 
   const triggerHugSuccess = () => {
     endHold();
-    bloomOverlay.classList.add('active');
-
-    if (window.birthdayAudio) {
-      window.birthdayAudio.playHarpGlissando();
-    }
-    if (window.birthday3D) {
-      window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 70);
-    }
+    openOfficialBirthdayHugModal(window.innerWidth / 2, window.innerHeight / 2);
   };
 
   hugBtn.addEventListener('mousedown', startHold);
@@ -633,14 +676,13 @@ function initVirtualHugHold() {
 
   if (bloomClose) {
     bloomClose.addEventListener('click', () => {
-      bloomOverlay.classList.remove('active');
-      if (window.birthdayAudio) window.birthdayAudio.playChime(5);
+      closeOfficialBirthdayHugModal();
     });
   }
 
   bloomOverlay.addEventListener('click', (e) => {
-    if (e.target === bloomOverlay) {
-      bloomOverlay.classList.remove('active');
+    if (e.target === bloomOverlay || e.target.classList.contains('hug-modal-scrim')) {
+      closeOfficialBirthdayHugModal();
     }
   });
 }
@@ -843,24 +885,7 @@ function initAugust19Countdown() {
 
   if (btnFinalHug) {
     btnFinalHug.addEventListener('click', (e) => {
-      const bloomOverlay = document.getElementById('hug-bloom-overlay');
-      if (bloomOverlay) {
-        bloomOverlay.classList.add('active');
-      }
-
-      if (window.birthdayAudio) window.birthdayAudio.playHarpGlissando();
-      if (window.birthday3D) {
-        window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 70);
-        for (let i = 0; i < 4; i++) {
-          setTimeout(() => {
-            window.birthday3D.spawnBloomBurst(
-              window.innerWidth * Math.random(),
-              window.innerHeight * Math.random(),
-              25
-            );
-          }, (i + 1) * 150);
-        }
-      }
+      openOfficialBirthdayHugModal(e.clientX, e.clientY);
     });
   }
 }
