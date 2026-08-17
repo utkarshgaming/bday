@@ -94,7 +94,7 @@
   <main class="experience-wrapper">
 
     <!-- 💌 4.1 THE 3D WAX-SEALED ENVELOPE CEREMONY (CINEMATIC OPENING) -->
-    <section class="envelope-ceremony-section hero-cinematic-wrapper" id="envelope-section">
+    <section id="opening-hero-section" class="envelope-ceremony-section hero-cinematic-wrapper opening-hero-screen">
       <video
         id="envelope-bg-video"
         class="hero-cinematic-video"
@@ -110,36 +110,51 @@
       <div class="hero-cinematic-vignette"></div>
       <div class="hero-cinematic-tint"></div>
 
-      <!-- Foreground Content (Envelope, Seal & Text) -->
-      <div class="hero-cinematic-content">
-        <div class="envelope-intro-text">
-          <span class="section-tag">An Archival Delivery</span>
-          <h2>Hey Reet... ❤️<span class="pulsing-heart-badge">❤️</span></h2>
-          <p class="section-subtitle">I couldn't be there with you in person today... so I built a little world just for you.</p>
-        </div>
+      <!-- Top Archival Badge & Introductory Copy -->
+      <div class="hero-header-block">
+        <div class="pill-badge">🌸 AN ARCHIVAL DELIVERY</div>
+        <h1 class="hero-greet-title">Hey Reet... ❤️</h1>
+        <p class="hero-greet-sub">
+          I couldn't be there with you in person today... so I built a little world just for you.
+        </p>
+      </div>
 
-        <div class="envelope-3d-stage">
-          <div id="wax-envelope" class="envelope-wrapper">
-            <div class="envelope-flap"></div>
-            <div class="envelope-letter">
-              <h3 class="font-serif" style="color: var(--crimson-rose); margin-bottom: 8px;">Made Exclusively for You 🤭</h3>
-              <p class="font-editorial" style="font-size: 1.15rem; color: var(--ink-charcoal); line-height: 1.5;">
+      <!-- Responsive Zero-Glitch Envelope Container -->
+      <div class="envelope-scene-wrapper">
+        <div class="envelope-box" id="envelope-box">
+          <!-- 1. Back Pocket Plate -->
+          <div class="env-back-plate"></div>
+
+          <!-- 2. The Letter (Fully tucked inside until opened) -->
+          <div class="env-letter" id="env-letter">
+            <div class="letter-content">
+              <h3 class="letter-badge">Made Exclusively for You 🤭</h3>
+              <p class="letter-body">
                 A normal birthday text wasn't enough, so your Uttu puttu made you a whole website.
               </p>
-              <span class="font-hand" style="color: var(--sepia-dust); margin-top: 10px; font-size: 1.2rem;">Scroll down, birthday girl ✨</span>
-            </div>
-            <div class="envelope-pocket"></div>
-            
-            <div id="wax-seal" class="wax-seal" title="Tap wax seal to open">
-              <div class="wax-seal-inner">
-                <svg class="wax-seal-lily" viewBox="0 0 100 100">
-                  <path d="M50 85 C20 60 5 40 5 25 C5 12 15 5 28 5 C38 5 46 12 50 20 C54 12 62 5 72 5 C85 5 95 12 95 25 C95 40 80 60 50 85 Z" fill="#FFE5EC" stroke="#FFFFFF" stroke-width="3.5"/>
-                </svg>
-              </div>
+              <span class="letter-prompt">Scroll down, birthday girl ✨</span>
             </div>
           </div>
+
+          <!-- 3. Front Lower Pocket (Triangle Pocket Covering Letter) -->
+          <div class="env-front-pocket"></div>
+
+          <!-- 4. Top Flap with 3D Fold Transition -->
+          <div class="env-top-flap"></div>
+
+          <!-- 5. Centered Interactive Wax Seal -->
+          <button 
+            type="button" 
+            class="wax-seal-button" 
+            id="wax-seal-trigger"
+            aria-label="Open Envelope"
+          >
+            <span class="seal-heart">❤️</span>
+          </button>
         </div>
-        <p class="wax-seal-hint">Tap the wax seal to open 🕯️</p>
+
+        <!-- Instruction Indicator -->
+        <div class="seal-hint-text">Tap the wax seal to open 🕯️</div>
       </div>
     </section>
 

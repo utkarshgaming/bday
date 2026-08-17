@@ -161,13 +161,13 @@ function initGatekeeper() {
 }
 
 /* --------------------------------------------------------------------------
-   💌 4.1 THE 3D WAX-SEALED ENVELOPE CEREMONY
+   💌 4.1 THE ZERO-GLITCH WAX-SEALED ENVELOPE CEREMONY
    -------------------------------------------------------------------------- */
 function initEnvelopeCeremony() {
-  const envelope = document.getElementById('wax-envelope');
-  const waxSeal = document.getElementById('wax-seal');
+  const envelope = document.getElementById('envelope-box') || document.getElementById('wax-envelope');
+  const waxSeal = document.getElementById('wax-seal-trigger') || document.getElementById('wax-seal');
 
-  if (!envelope || !waxSeal) return;
+  if (!envelope) return;
 
   const triggerOpenEnvelope = (e) => {
     if (e) e.stopPropagation();
@@ -179,7 +179,7 @@ function initEnvelopeCeremony() {
       window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 40);
     }
 
-    envelope.classList.add('opened');
+    envelope.classList.add('is-open', 'opened');
 
     // 🌅 Fade in the global romantic sunset background
     const bgContainer = document.getElementById('site-post-envelope-bg');
@@ -196,16 +196,18 @@ function initEnvelopeCeremony() {
     }
 
     setTimeout(() => {
-      const hero = document.getElementById('hero-monument');
+      const hero = document.getElementById('hero-monument') || document.querySelector('.hero-section');
       if (hero) {
         hero.scrollIntoView({ behavior: 'smooth' });
       }
     }, 1200);
   };
 
-  waxSeal.addEventListener('click', triggerOpenEnvelope);
+  if (waxSeal) {
+    waxSeal.addEventListener('click', triggerOpenEnvelope);
+  }
   envelope.addEventListener('click', (e) => {
-    if (!envelope.classList.contains('opened')) {
+    if (!envelope.classList.contains('is-open') && !envelope.classList.contains('opened')) {
       triggerOpenEnvelope(e);
     }
   });
