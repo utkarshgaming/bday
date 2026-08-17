@@ -86,6 +86,13 @@ function initGatekeeper() {
       cinematicVideo.play().catch(() => {});
     }
 
+    // 🌅 Reveal the global sunset background
+    const bgContainer = document.getElementById('site-post-envelope-bg');
+    if (bgContainer) {
+      bgContainer.classList.remove('is-hidden');
+      bgContainer.classList.add('is-visible');
+    }
+
     overlay.classList.add('unlocked');
     setTimeout(() => {
       overlay.style.display = 'none';
@@ -140,13 +147,13 @@ function initEnvelopeCeremony() {
 
   if (!envelope || !waxSeal) return;
 
-  waxSeal.addEventListener('click', (e) => {
-    e.stopPropagation();
+  const triggerOpenEnvelope = (e) => {
+    if (e) e.stopPropagation();
 
     if (window.birthdayAudio) {
       window.birthdayAudio.playHarpGlissando();
     }
-    if (window.birthday3D) {
+    if (window.birthday3D && e && e.clientX) {
       window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 40);
     }
 
@@ -165,6 +172,13 @@ function initEnvelopeCeremony() {
         hero.scrollIntoView({ behavior: 'smooth' });
       }
     }, 1200);
+  };
+
+  waxSeal.addEventListener('click', triggerOpenEnvelope);
+  envelope.addEventListener('click', (e) => {
+    if (!envelope.classList.contains('opened')) {
+      triggerOpenEnvelope(e);
+    }
   });
 }
 
