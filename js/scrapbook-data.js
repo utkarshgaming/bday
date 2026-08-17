@@ -31,7 +31,7 @@ const futureMomentsData = [
   {
     id: "moment-lap-nap",
     file: "IMG_8003.JPG",
-    title: "Lap Nap Sanctuary 💆‍♂️🤍",
+    title: "Lap Nap Sanctuary 💆‍♂️❤️",
     caption: "The only acceptable place to collapse after an exhausting day. 🥺",
     secretNote: "Head scratches and quiet moments in your lap > literally anything else in this world.",
     tag: "Cozy Moment"
@@ -55,7 +55,7 @@ const futureMomentsData = [
   {
     id: "moment-cafe-stare",
     file: "IMG_7998.JPG",
-    title: "Lost in Your Eyes ☕🤍",
+    title: "Lost in Your Eyes ☕❤️",
     caption: "Just me completely mesmerized while my favorite person talks about her day. 🥺✨",
     secretNote: "I could listen to you yap and tell random stories for hours and never get bored.",
     tag: "Deep Talks"

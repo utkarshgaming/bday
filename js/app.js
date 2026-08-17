@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initGlobalHeartSpawner() {
-  const heartIcons = ['❤️', '💖', '💕', '💗', '🤍', '✨', '🥺'];
+  const heartIcons = ['❤️', '💖', '💕', '💗', '❤️', '✨', '🥺'];
   
   const spawnHearts = (x, y, count = 3) => {
     for (let i = 0; i < count; i++) {
@@ -81,7 +81,7 @@ function initGatekeeper() {
 
   if (!overlay || !btnConfirm || !btnEvasive) return;
 
-  // "I am Reet! 🤍"
+  // "I am Reet! ❤️"
   btnConfirm.addEventListener('click', (e) => {
     if (window.birthdayAudio) {
       window.birthdayAudio.playHarpGlissando();
@@ -127,7 +127,7 @@ function initGatekeeper() {
     "Access strictly for Reet! 👀",
     "Nice try, but no! 🤭",
     "Keep trying! 😂",
-    "Only Reet allowed! 🤍"
+    "Only Reet allowed! ❤️"
   ];
 
   let phraseIdx = 0;
@@ -304,7 +304,7 @@ function initScrapbookSection() {
         <!-- Back (Secret Sticky Note) -->
         <div class="moment-card-back polaroid-back">
           <p class="secret-note-text">"${item.secretNote}"</p>
-          <div class="polaroid-back-footer">— your Uttu puttu 🤍</div>
+          <div class="polaroid-back-footer">— your Uttu puttu ❤️</div>
         </div>
       </div>
     `;
@@ -384,7 +384,7 @@ function initLittleWorldArtifacts() {
 
       const stamp = document.createElement('div');
       stamp.className = 'screen-stamp floating-nickname-badge';
-      stamp.innerHTML = 'Reetu Puttu 🤍';
+      stamp.innerHTML = 'Reetu Puttu ❤️';
       stamp.style.left = `${Math.max(16, Math.min(window.innerWidth - 220, Math.random() * (window.innerWidth - 200)))}px`;
       stamp.style.top = `${Math.max(60, Math.min(window.innerHeight - 80, Math.random() * (window.innerHeight - 100)))}px`;
       stamp.style.setProperty('--rot', `${(Math.random() - 0.5) * 28}deg`);
@@ -654,11 +654,11 @@ function initSwipeableDeck() {
   const cardsData = [
     { q: "Cute?", a: "1000% Confirmed 🧸" },
     { q: "Irresistibly Cute?", a: "Literally all the time 🥺✨" },
-    { q: "Prettiest Smile?", a: "Lights up my whole day ✨🤍" },
+    { q: "Prettiest Smile?", a: "Lights up my whole day ✨❤️" },
     { q: "Best Part of My Day?", a: "Every single conversation 😌❤️" },
     { q: "Baby?", a: "Obviously. ❤️" },
     { q: "My Favorite Person to Annoy?", a: "My full-time job 😂" },
-    { q: "Someone Special?", a: "...more than words can say. 🤍", isGold: true }
+    { q: "Someone Special?", a: "...more than words can say. ❤️", isGold: true }
   ];
 
   let currentIndex = 0;
