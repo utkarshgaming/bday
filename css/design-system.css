@@ -28,7 +28,19 @@
   --warm-blush:         #FF758F;
   --macaron-lavender:   #FFE5EC;
   
-  /* Ink & Typography */
+  /* High-Contrast Luminous Text Tokens */
+  --text-heading-bright:   #FFFFFF;                     /* Pure white for major display headers */
+  --text-heading-pink:     #FFE4E9;                     /* Soft glowing baby-pink for secondary titles */
+  --text-body-luminous:    #FCEEF2;                     /* Cream-rose white for body paragraphs */
+  --text-subtext-muted:    #F0D3DC;                     /* Soft lavender-rose for hints and captions */
+  --text-accent-hotpink:   #FF758F;                     /* Vibrant pink for emphasizes and badges */
+  --text-script-glow:      #FF8FA3;                     /* Glowing cursive script accents */
+
+  /* Text Glow & Drop Shadows for Enhanced Legibility */
+  --shadow-text-subtle:    0 2px 8px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 117, 143, 0.25);
+  --shadow-text-glow:      0 0 16px rgba(255, 182, 193, 0.6), 0 2px 6px rgba(0, 0, 0, 0.8);
+
+  /* Ink & Typography (for light cards) */
   --romantic-charcoal:  #3D1E24; /* Deep velvet-berry ink (much softer & warmer than black) */
   --ink-charcoal:       #3D1E24;
   --sepia-ink:          #3D1E24;
@@ -207,11 +219,17 @@ body::before {
 }
 
 /* Typography Utilities */
-h1, h2, h3, h4, .font-serif {
+h1, h2, h3, .section-title, .hero-title, .display-header {
   font-family: var(--font-serif);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink-charcoal);
+  color: var(--text-heading-bright);
+  text-shadow: var(--shadow-text-subtle);
+}
+
+h4, h5, .subtitle, .section-subtitle {
+  color: var(--text-heading-pink);
+  text-shadow: var(--shadow-text-subtle);
 }
 
 .font-editorial {
@@ -228,23 +246,24 @@ h1, h2, h3, h4, .font-serif {
 }
 
 /* Luxury Editorial Section Header */
-.section-tag {
+.section-tag, .pill-badge, .section-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  background: #FFE5EC;
-  border: 1px solid #FFCCD5;
+  padding: 6px 18px;
+  background: rgba(255, 117, 143, 0.2) !important;
+  border: 1px solid rgba(255, 182, 193, 0.45) !important;
   border-radius: var(--radius-full);
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cherry-rose);
+  color: #FFE4E9 !important;
   margin-bottom: 1rem;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 10px rgba(255, 117, 143, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 14px rgba(255, 117, 143, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .section-tag::before {
@@ -256,16 +275,18 @@ h1, h2, h3, h4, .font-serif {
   font-size: clamp(2rem, 5vw, 3.4rem);
   line-height: 1.15;
   margin-bottom: 1rem;
-  color: var(--romantic-charcoal);
+  color: var(--text-heading-bright);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 117, 143, 0.35);
 }
 
 .section-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--sepia-subtext);
+  color: var(--text-heading-pink);
   max-width: 620px;
   margin: 0 auto;
   font-weight: 400;
   line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 /* Glassmorphism & Rose-Gold Tactile Card Utility */
