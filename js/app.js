@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initGatekeeper();
   initEnvelopeCeremony();
+  initHeroScrollFade();
   initKeychainBadge();
   initScrapbookSection();
   initLittleWorldArtifacts();
@@ -187,6 +188,13 @@ function initEnvelopeCeremony() {
       bgContainer.classList.add('is-visible');
     }
 
+    // Softly cross-fade hero background video
+    const heroVideo = document.querySelector('#envelope-bg-video');
+    if (heroVideo) {
+      heroVideo.style.transition = 'opacity 1.5s ease-out';
+      heroVideo.style.opacity = '0.35';
+    }
+
     setTimeout(() => {
       const hero = document.getElementById('hero-monument');
       if (hero) {
@@ -201,6 +209,23 @@ function initEnvelopeCeremony() {
       triggerOpenEnvelope(e);
     }
   });
+}
+
+/* --------------------------------------------------------------------------
+   ✨ HERO SCROLL FADE CONTROLLER (Seamless Dissolve on Scroll)
+   -------------------------------------------------------------------------- */
+function initHeroScrollFade() {
+  const heroSection = document.querySelector('.hero-cinematic-wrapper');
+  if (!heroSection) return;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const heroHeight = heroSection.offsetHeight || window.innerHeight;
+    
+    // Calculate opacity: 1 at top, fades to 0 as user scrolls past hero
+    const opacity = Math.max(0, 1 - (scrollY / (heroHeight * 0.75)));
+    heroSection.style.opacity = opacity.toString();
+  }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
