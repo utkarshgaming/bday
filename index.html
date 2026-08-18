@@ -349,14 +349,14 @@
       </div>
     </section>
 
-    <!-- 🎁 4.5 THE INTERACTIVE 3D MYSTERY GIFT BOX -->
+    <!-- 🎁 4.5 THE INTERACTIVE 3D MULTI-GIFT UNWRAPPING EXPERIENCE -->
     <section class="gift-box-section" id="gift-box-section">
       <span class="section-tag">Interactive Mystery</span>
       <h2 class="section-title">A Special Parcel for Reet</h2>
-      <p class="section-subtitle">Tap the satin ribbon to untie the knot and see what's inside.</p>
+      <p class="section-subtitle">Tap the satin ribbon to untie the knot and unwrap your gifts.</p>
 
       <div class="gift-box-stage">
-        <div id="mystery-gift-box" class="gift-box-3d" title="Click to open the gift box!">
+        <div id="mystery-gift-box" class="gift-box-3d" title="Click to unwrap the gift box!">
           <div class="gift-cube-body">
             <div class="gift-ribbon-v"></div>
             <div class="gift-ribbon-h"></div>
@@ -367,54 +367,19 @@
 
       <!-- Revealed Gift Box Contents -->
       <div class="gift-revealed-contents">
-        <!-- 🎸 Centerpiece: The Acoustic Guitar Video Surprise -->
-        <div class="gift-guitar-showcase deckle-card">
-          <h3 class="font-serif guitar-showcase-title">Recorded specifically <span class="guitar-accent-pink">for My Babyyy</span> 🎸</h3>
-          <p class="guitar-showcase-subtitle">
-            A little birthday tune straight from my strings to you. Turn up the volume and enjoy. 😌❤️
-          </p>
+        <div class="mystery-unwrapped-stage" id="mystery-unwrapped-stage">
+          <!-- Gift Tab Pills Selector -->
+          <div class="gift-nav-tabs" id="gift-nav-tabs">
+            <button type="button" class="gift-tab active" data-gift-index="0">🎸 Song</button>
+            <button type="button" class="gift-tab" data-gift-index="1">🎂 Cake</button>
+            <button type="button" class="gift-tab" data-gift-index="2">🎁 Hamper</button>
+            <button type="button" class="gift-tab" data-gift-index="3">🍫 Chocolates</button>
+            <button type="button" class="gift-tab" data-gift-index="4">🌸 Lilies</button>
+          </div>
 
-          <div class="private-concert-card">
-            <!-- 1. Video Display Frame -->
-            <div class="concert-video-frame">
-              <video 
-                id="private-guitar-video" 
-                src="assets/hbdguitar.mp4" 
-                playsinline 
-                preload="metadata"
-                poster="assets/images/hbd_baby_illustration.jpg"
-              ></video>
-              
-              <!-- Floating Luminous Floating Badge -->
-              <div class="video-floating-badge">
-                <span>✨ Happy Birthday Babyyyy ❤️</span>
-              </div>
-
-              <!-- Play/Pause Central Tap Overlay -->
-              <button type="button" class="video-central-play-btn" id="central-video-btn" aria-label="Play/Pause">
-                <div class="play-pulse-ring"></div>
-                <span class="play-icon">▶</span>
-              </button>
-            </div>
-
-            <!-- 2. Integrated Romantic Player Bar -->
-            <div class="concert-player-controls">
-              <!-- Play / Pause Action Button -->
-              <button type="button" class="custom-play-trigger" id="custom-play-trigger">
-                <span class="btn-icon">🎵</span>
-                <span class="btn-text">Play it for me</span>
-              </button>
-
-              <!-- Custom Glowing Scrubber & Timestamp -->
-              <div class="custom-track-bar" id="custom-track-bar">
-                <div class="track-progress-fill" id="track-progress-fill"></div>
-                <div class="track-thumb" id="track-thumb"></div>
-              </div>
-              
-              <div class="track-time-display">
-                <span id="current-time">0:00</span> / <span id="total-duration">0:14</span>
-              </div>
-            </div>
+          <!-- Active Gift Display Card (Frosted Glass Keepsake Card) -->
+          <div class="gift-display-card" id="active-gift-card">
+            <!-- Dynamic Content Injected via JS -->
           </div>
         </div>
 
