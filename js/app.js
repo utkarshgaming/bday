@@ -1054,46 +1054,51 @@ function initSwipeableDeck() {
    🎆 4.12 AUGUST 19 COUNTDOWN & CELEBRATION ENGINE
    -------------------------------------------------------------------------- */
 function initAugust19Countdown() {
-  const daysEl = document.getElementById('cd-days');
-  const hoursEl = document.getElementById('cd-hours');
-  const minsEl = document.getElementById('cd-mins');
-  const secsEl = document.getElementById('cd-secs');
-  const celebrationTitle = document.getElementById('birthday-banner-title');
+  function updateBirthdayCountdown() {
+    const targetDate = new Date('2026-08-19T00:00:00+05:30').getTime(); // IST 12:00 AM
+    const now = new Date().getTime();
+    const difference = targetDate - now;
 
-  function updateCountdown() {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    let target = new Date(currentYear, 7, 19, 0, 0, 0); // August 19 (month 7 is Aug)
+    const countdownContainer = document.querySelector('.countdown-box, .countdown-container, #countdown-wrapper');
+    const countdownTitle = document.querySelector('#birthday-banner-title, .countdown-title, #countdown-heading');
 
-    // If August 19 has passed this year, point to next year
-    if (now > new Date(currentYear, 7, 19, 23, 59, 59)) {
-      target = new Date(currentYear + 1, 7, 19, 0, 0, 0);
-    }
-
-    const isTodayAugust19 = (now.getMonth() === 7 && now.getDate() === 19);
-
-    if (isTodayAugust19) {
-      if (celebrationTitle) {
-        celebrationTitle.textContent = "✨ HAPPY BIRTHDAY REET! TODAY IS OFFICIALLY YOUR DAY! 🎂🎉❤️";
+    if (difference <= 0) {
+      // 12:00 AM has arrived / Birthday state
+      if (countdownTitle) {
+        countdownTitle.innerHTML = 'Today is finally here • <span style="color: #FF3366;">Reet\'s Day 🎂❤️</span>';
       }
+
+      if (countdownContainer) {
+        countdownContainer.innerHTML = `
+          <div class="birthday-unlocked-pill">
+            <span class="sparkle-icon">✨</span>
+            <span class="unlocked-text">IT'S OFFICIALLY AUGUST 19 ❤️</span>
+            <span class="sparkle-icon">✨</span>
+          </div>
+        `;
+      }
+      return;
     }
 
-    const diff = target - now;
-    if (diff <= 0) return;
+    // Normal countdown calculation before 12:00 AM
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    const daysEl = document.getElementById('days-count') || document.getElementById('cd-days');
+    const hoursEl = document.getElementById('hours-count') || document.getElementById('cd-hours');
+    const minutesEl = document.getElementById('minutes-count') || document.getElementById('cd-mins');
+    const secondsEl = document.getElementById('seconds-count') || document.getElementById('cd-secs');
 
     if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
     if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-    if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
-    if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  updateBirthdayCountdown();
+  setInterval(updateBirthdayCountdown, 1000);
 }
 
 /* --------------------------------------------------------------------------
