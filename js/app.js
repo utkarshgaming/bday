@@ -491,7 +491,14 @@ function initLittleWorldArtifacts() {
 function initGiftBox() {
   const giftBox = document.getElementById('mystery-gift-box');
   const section = document.getElementById('gift-box-section');
-  const giftVideo = document.getElementById('gift-guitar-video');
+  const video = document.getElementById('private-guitar-video') || document.getElementById('gift-guitar-video');
+  const card = document.querySelector('.private-concert-card') || document.getElementById('gift-concert-frame');
+  const playBtn = document.getElementById('custom-play-trigger') || document.getElementById('btn-gift-guitar-play');
+  const centerBtn = document.getElementById('central-video-btn');
+  const trackBar = document.getElementById('custom-track-bar');
+  const progressFill = document.getElementById('track-progress-fill');
+  const currentTimeEl = document.getElementById('current-time');
+  const totalDurationEl = document.getElementById('total-duration');
 
   if (!giftBox || !section) return;
 
@@ -505,63 +512,102 @@ function initGiftBox() {
       window.birthday3D.spawnBloomBurst(e.clientX, e.clientY, 50);
     }
 
-    if (isNowOpened && giftVideo) {
+    if (isNowOpened && (card || video)) {
       // Gentle scroll to center revealed gift
       setTimeout(() => {
-        giftVideo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const target = card || video;
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 500);
     }
   });
 
-  // Handle gift box video audio ducking and play button
-  const btnGiftPlay = document.getElementById('btn-gift-guitar-play');
-  if (giftVideo) {
-    if (btnGiftPlay) {
-      btnGiftPlay.addEventListener('click', () => {
-        if (giftVideo.paused) {
-          giftVideo.play().catch(err => console.warn('Playback prevented:', err));
-        } else {
-          giftVideo.pause();
+  if (!video) return;
+
+  function togglePlay() {
+    if (video.paused) {
+      video.play().then(() => {
+        if (card) card.classList.add('is-playing');
+        if (playBtn) {
+          const textSpan = playBtn.querySelector('.btn-text');
+          const iconSpan = playBtn.querySelector('.btn-icon');
+          if (textSpan) textSpan.textContent = 'Pause Melody';
+          if (iconSpan) iconSpan.textContent = '⏸';
         }
-      });
+        if (window.birthdayAudio) {
+          window.birthdayAudio.pauseAmbientMusic();
+        }
+        if (window.birthday3D) {
+          window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 40);
+        }
+      }).catch(err => console.warn('Video play blocked:', err));
+    } else {
+      video.pause();
+      if (card) card.classList.remove('is-playing');
+      if (playBtn) {
+        const textSpan = playBtn.querySelector('.btn-text');
+        const iconSpan = playBtn.querySelector('.btn-icon');
+        if (textSpan) textSpan.textContent = 'Play it for me';
+        if (iconSpan) iconSpan.textContent = '🎵';
+      }
+      if (window.birthdayAudio) {
+        window.birthdayAudio.resumeAmbientMusic();
+      }
     }
+  }
 
-    giftVideo.addEventListener('play', () => {
-      if (btnGiftPlay) btnGiftPlay.textContent = 'Pause ⏸️';
-      const frame = document.getElementById('gift-concert-frame');
-      if (frame) frame.classList.add('is-playing');
+  if (playBtn) playBtn.addEventListener('click', togglePlay);
+  if (centerBtn) centerBtn.addEventListener('click', togglePlay);
 
-      if (window.birthdayAudio) {
-        window.birthdayAudio.pauseAmbientMusic();
-      }
-      if (window.birthday3D) {
-        window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 40);
-      }
-    });
-
-    giftVideo.addEventListener('pause', () => {
-      if (btnGiftPlay) btnGiftPlay.textContent = 'Play it for me 🎵';
-      const frame = document.getElementById('gift-concert-frame');
-      if (frame) frame.classList.remove('is-playing');
-
-      if (window.birthdayAudio) {
-        window.birthdayAudio.resumeAmbientMusic();
-      }
-    });
-
-    giftVideo.addEventListener('ended', () => {
-      if (btnGiftPlay) btnGiftPlay.textContent = 'Play it for me 🎵';
-      const frame = document.getElementById('gift-concert-frame');
-      if (frame) frame.classList.remove('is-playing');
-
-      if (window.birthdayAudio) {
-        window.birthdayAudio.resumeAmbientMusic();
-      }
-      if (window.birthday3D) {
-        window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 50);
+  // Custom Scrubber Bar seeking
+  if (trackBar) {
+    trackBar.addEventListener('click', (e) => {
+      const rect = trackBar.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (video.duration) {
+        video.currentTime = pos * video.duration;
       }
     });
   }
+
+  video.addEventListener('timeupdate', () => {
+    if (video.duration) {
+      const pct = (video.currentTime / video.duration) * 100;
+      if (progressFill) progressFill.style.width = `${pct}%`;
+
+      const curM = Math.floor(video.currentTime / 60);
+      const curS = Math.floor(video.currentTime % 60).toString().padStart(2, '0');
+      if (currentTimeEl) currentTimeEl.textContent = `${curM}:${curS}`;
+    }
+  });
+
+  const updateDuration = () => {
+    if (video.duration && !isNaN(video.duration)) {
+      const durM = Math.floor(video.duration / 60);
+      const durS = Math.floor(video.duration % 60).toString().padStart(2, '0');
+      if (totalDurationEl) totalDurationEl.textContent = `${durM}:${durS}`;
+    }
+  };
+
+  video.addEventListener('loadedmetadata', updateDuration);
+  video.addEventListener('durationchange', updateDuration);
+  if (video.readyState >= 1) updateDuration();
+
+  video.addEventListener('ended', () => {
+    if (card) card.classList.remove('is-playing');
+    if (playBtn) {
+      const textSpan = playBtn.querySelector('.btn-text');
+      const iconSpan = playBtn.querySelector('.btn-icon');
+      if (textSpan) textSpan.textContent = 'Play again 🎵';
+      if (iconSpan) iconSpan.textContent = '🔁';
+    }
+    if (progressFill) progressFill.style.width = '0%';
+    if (window.birthdayAudio) {
+      window.birthdayAudio.resumeAmbientMusic();
+    }
+    if (window.birthday3D) {
+      window.birthday3D.spawnBloomBurst(window.innerWidth / 2, window.innerHeight / 2, 50);
+    }
+  });
 }
 
 /* --------------------------------------------------------------------------

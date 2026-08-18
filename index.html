@@ -374,38 +374,55 @@
             A little birthday tune straight from my strings to you. Turn up the volume and enjoy. 😌❤️
           </p>
 
-          <div class="gift-video-player-wrap" id="gift-concert-frame">
-            <!-- 🎨 Full Artwork Poster -->
-            <img src="assets/images/hbd_baby_illustration.jpg" alt="Happy Birthday Baby" class="gift-art-poster-img" loading="lazy" decoding="async">
+          <div class="private-concert-card">
+            <!-- 1. Video Display Frame -->
+            <div class="concert-video-frame">
+              <video 
+                id="private-guitar-video" 
+                src="assets/hbdguitar.mp4" 
+                playsinline 
+                preload="metadata"
+                poster="assets/images/hbd_baby_illustration.jpg"
+              ></video>
+              
+              <!-- Floating Luminous Floating Badge -->
+              <div class="video-floating-badge">
+                <span>✨ Happy Birthday Babyyyy ❤️</span>
+              </div>
 
-            <!-- 💖 Cute Handwritten Badge with Hearts -->
-            <div class="gift-art-title-overlay">
-              <span class="cute-banner-sparkle">✨</span>
-              <span class="cute-banner-text">Happy Birthday Babyyyyy</span>
-              <span class="cute-banner-heart pulse-heart">❤️</span>
-              <span class="cute-banner-heart float-heart">💖</span>
+              <!-- Play/Pause Central Tap Overlay -->
+              <button type="button" class="video-central-play-btn" id="central-video-btn" aria-label="Play/Pause">
+                <div class="play-pulse-ring"></div>
+                <span class="play-icon">▶</span>
+              </button>
             </div>
 
-            <!-- 🎵 Audio / Video Playback Bar -->
-            <video id="gift-guitar-video" class="gift-video-element" playsinline controls preload="metadata" poster="assets/images/hbd_baby_illustration.jpg">
-              <source src="assets/hbdguitar.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
+            <!-- 2. Integrated Romantic Player Bar -->
+            <div class="concert-player-controls">
+              <!-- Play / Pause Action Button -->
+              <button type="button" class="custom-play-trigger" id="custom-play-trigger">
+                <span class="btn-icon">🎵</span>
+                <span class="btn-text">Play it for me</span>
+              </button>
 
-          <div style="margin-top: 14px;">
-            <button id="btn-gift-guitar-play" class="btn-primary btn-gold" style="padding: 12px 28px; font-size: 0.98rem; width: 100%;">
-              Play it for me 🎵
-            </button>
-          </div>
+              <!-- Custom Glowing Scrubber & Timestamp -->
+              <div class="custom-track-bar" id="custom-track-bar">
+                <div class="track-progress-fill" id="track-progress-fill"></div>
+                <div class="track-thumb" id="track-thumb"></div>
+              </div>
+              
+              <div class="track-time-display">
+                <span id="current-time">0:00</span> / <span id="total-duration">0:14</span>
+              </div>
+            </div>
 
-          <div class="guitar-player-meta" style="margin-top: 14px;">
-            <span style="font-size: 0.85rem; font-weight: 700; color: var(--crimson-rose);">Played & Recorded by your Uttu puttu ❤️</span>
-            <div class="guitar-eq-wave">
-              <span class="guitar-eq-bar"></span>
-              <span class="guitar-eq-bar"></span>
-              <span class="guitar-eq-bar"></span>
-              <span class="guitar-eq-bar"></span>
+            <!-- 3. Signature Note Footer -->
+            <div class="concert-signature-footer">
+              <span class="note-icon">🎸</span>
+              <span class="sig-text">Played & Recorded with love by your Uttu puttu ❤️</span>
+              <div class="audio-live-waves">
+                <span></span><span></span><span></span><span></span>
+              </div>
             </div>
           </div>
         </div>
