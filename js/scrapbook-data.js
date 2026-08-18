@@ -8,7 +8,7 @@ const futureMomentsData = [
     id: "moment-white-lilies",
     file: "white_lilies_bouquet.jpg",
     title: "White lilies for baby",
-    caption: "Did you really think that was just small talk? 🤭❤️",
+    caption: "Handpicked just the way you like them. 🌸❤️",
     secretNote: "White lilies for my favorite girl. Obviously I got them specifically for you. ❤️",
     tag: "MANIFESTING #01"
   },

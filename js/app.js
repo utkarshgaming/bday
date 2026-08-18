@@ -422,11 +422,38 @@ function initLittleWorldArtifacts() {
   }
   if (hugCountText) hugCountText.textContent = `${hugCount.toLocaleString()} Hugs`;
 
+  function spawnMicroHugHeart(btn) {
+    const rect = btn.getBoundingClientRect();
+    const pop = document.createElement('span');
+    pop.className = 'hug-pop-text';
+    pop.textContent = '+1 🫂';
+    pop.style.left = `${rect.left + rect.width / 2}px`;
+    pop.style.top = `${rect.top}px`;
+    document.body.appendChild(pop);
+    setTimeout(() => pop.remove(), 800);
+  }
+
   if (hugBtn) {
     hugBtn.addEventListener('click', (e) => {
-      hugCount++;
-      localStorage.setItem('reet_hug_count', hugCount.toString());
-      if (hugCountText) hugCountText.textContent = `${hugCount.toLocaleString()} Hugs`;
+      e.preventDefault();
+      e.stopPropagation();
+
+      // 1. Get current count safely
+      let currentHugs = parseInt(localStorage.getItem('reet_hug_count'), 10);
+      if (isNaN(currentHugs) || currentHugs < 10819) {
+        currentHugs = 10819;
+      }
+
+      // 2. Increment & Save
+      currentHugs += 1;
+      localStorage.setItem('reet_hug_count', currentHugs.toString());
+
+      // 3. Update Text Display with smooth counter bump
+      if (hugCountText) {
+        hugCountText.textContent = `${currentHugs.toLocaleString()} Hugs`;
+        hugCountText.classList.add('bump-animate');
+        setTimeout(() => hugCountText.classList.remove('bump-animate'), 200);
+      }
 
       if (hugFill) {
         hugFill.style.transform = 'scale(1.04)';
@@ -434,7 +461,9 @@ function initLittleWorldArtifacts() {
       }
 
       if (window.birthdayAudio) window.birthdayAudio.playChime(4);
-      openOfficialBirthdayHugModal(e.clientX, e.clientY);
+
+      // 4. Subtle Micro-Particle / Floating Heart Pop (+1 indicator)
+      spawnMicroHugHeart(hugBtn);
     });
   }
 
